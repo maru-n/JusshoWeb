@@ -7,7 +7,10 @@
 </body>
 
 <template name="operations">
-    <button class="new-operation">作戦を追加</button>
+    <form class="new-operation">
+        <input type="text" name="text" placeholder="{{operationDefaultName}}" />
+        <input type="submit" value="作戦を追加">
+    </form>
     {{#each operations}}
     {{> operation}}
     {{/each}}

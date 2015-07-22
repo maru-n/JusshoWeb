@@ -12,17 +12,26 @@ Operations.defaultName = function() {
 if (Meteor.isClient) {
 
   Template.operations.helpers({
-    operations: function () {
+    operations: function() {
       return Operations.find();
+    },
+    operationDefaultName: function() {
+      return Operations.defaultName();
     },
   });
 
   Template.operations.events({
-    'click .new-operation': function(event) {
+    'submit .new-operation': function(event) {
+      event.preventDefault();
+      var text = event.target.text.value;
+      if (!text) {
+        text = Operations.defaultName();
+      };
       Operations.insert({
-        name: Operations.defaultName(),
+        name: text,
         //owner: Meteor.userId(),
       })
+      event.target.text.value = "";
     },
   });
 
