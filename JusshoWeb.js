@@ -64,8 +64,11 @@ if (Meteor.isClient) {
   Template.operation.helpers({
     isOwned: function() {
       return this.owner === Meteor.userId();
+    },
+    ownerName: function() {
+      return Meteor.users.findOne(this.owner).username;
     }
-  })
+  });
 
   Template.operation.events({
     'click .delete': function(event) {
