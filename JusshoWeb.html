@@ -1,14 +1,29 @@
 <head>
-  <title>JusshoWeb</title>
+    <title>十将会</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+    {{> loginButtons}}
+    {{> operationList}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="operationList">
+    <form class="new-operation">
+        <input type="text" name="text" placeholder="{{operationDefaultName}}" />
+        <input type="submit" value="作戦を追加">
+    </form>
+    <ul>
+    {{#each operations}}
+    {{> operation}}
+    {{/each}}
+    </ul>
+</template>
+
+<template name="operation">
+    <li class="operation-view">
+        <span><strong>{{name}}</strong> ({{ownerName}})</span>
+        {{#if isOwned}}
+        <button class='delete'>削除</button>
+        {{/if}}
+    </li>
 </template>
