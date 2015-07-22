@@ -12,14 +12,16 @@
         <input type="text" name="text" placeholder="{{operationDefaultName}}" />
         <input type="submit" value="作戦を追加">
     </form>
+    <ul>
     {{#each operations}}
     {{> operation}}
     {{/each}}
+    </ul>
 </template>
 
 <template name="operation">
-    <div class="operation-view">
-        <span>{{name}}</span>
+    <li class="operation-view">
+        <span><strong>{{name}}</strong> ({{owner}})</span>
         <button class='delete'>削除</button>
-    </div>
+    </li>
 </template>
