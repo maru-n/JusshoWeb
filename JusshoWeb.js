@@ -36,6 +36,9 @@ if (Meteor.isClient) {
   });
 
   Template.operation.events({
+    'click .delete': function(event) {
+      Operations.remove(this._id);
+    }
   });
 }
 
