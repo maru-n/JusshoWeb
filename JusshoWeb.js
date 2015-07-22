@@ -1,23 +1,83 @@
-if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
+Operations = new Mongo.Collection('operations');
+Operations.defaultName = function() {
+  var date = new Date();
+  for (var i = 1;; i++) {
+    var nextName = date.toISOString().split('T')[0] + 'の作戦' + i;
+    if(!Operations.findOne({name: nextName})) {
+      return nextName;
+    }
+  }
+};
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
+Operations.allow({
+  insert: function (userId, doc) {
+    return (userId && doc.owner === userId);
+  },
+  update: function (userId, doc, fields, modifier) {
+    return (userId && doc.owner === userId);
+  },
+  remove: function (userId, doc) {
+    return (userId && doc.owner === userId);
+  },
+});
+
+Accounts.config({
+  forbidClientAccountCreation: true,
+});
+
+if (Meteor.isClient) {
+
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_ONLY"
+  });
+
+
+  Template.operationList.helpers({
+    operations: function() {
+      return Operations.find({},{
+        sort: {
+          createdAt: -1
+        }
+      });
+    },
+    operationDefaultName: function() {
+      return Operations.defaultName();
+    },
+  });
+
+  Template.operationList.events({
+    'submit .new-operation': function(event) {
+      event.preventDefault();
+      var text = event.target.text.value;
+      if (!text) {
+        text = Operations.defaultName();
+      };
+      Operations.insert({
+        name: text,
+        owner: Meteor.userId(),
+        createdAt: new Date(),
+      })
+      event.target.text.value = "";
+    },
+  });
+
+  Template.operation.helpers({
+    isOwned: function() {
+      return this.owner === Meteor.userId();
+    },
+    ownerName: function() {
+      return Meteor.users.findOne(this.owner).username;
     }
   });
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
+  Template.operation.events({
+    'click .delete': function(event) {
+      Operations.remove(this._id);
     }
   });
 }
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    // code to run on server at startup
   });
 }
