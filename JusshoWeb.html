@@ -4,10 +4,10 @@
 
 <body>
     {{> loginButtons}}
-    {{> operations}}
+    {{> operationList}}
 </body>
 
-<template name="operations">
+<template name="operationList">
     <form class="new-operation">
         <input type="text" name="text" placeholder="{{operationDefaultName}}" />
         <input type="submit" value="作戦を追加">

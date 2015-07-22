@@ -32,7 +32,7 @@ if (Meteor.isClient) {
   });
 
 
-  Template.operations.helpers({
+  Template.operationList.helpers({
     operations: function() {
       return Operations.find({},{
         sort: {
@@ -45,7 +45,7 @@ if (Meteor.isClient) {
     },
   });
 
-  Template.operations.events({
+  Template.operationList.events({
     'submit .new-operation': function(event) {
       event.preventDefault();
       var text = event.target.text.value;
