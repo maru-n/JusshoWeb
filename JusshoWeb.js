@@ -9,6 +9,18 @@ Operations.defaultName = function() {
   }
 };
 
+Operations.allow({
+  insert: function (userId, doc) {
+    return (userId && doc.owner === userId);
+  },
+  update: function (userId, doc, fields, modifier) {
+    return (userId && doc.owner === userId);
+  },
+  remove: function (userId, doc) {
+    return (userId && doc.owner === userId);
+  },
+});
+
 Accounts.config({
   forbidClientAccountCreation: true,
 });
@@ -22,7 +34,11 @@ if (Meteor.isClient) {
 
   Template.operations.helpers({
     operations: function() {
-      return Operations.find();
+      return Operations.find({},{
+        sort: {
+          createdAt: -1
+        }
+      });
     },
     operationDefaultName: function() {
       return Operations.defaultName();
@@ -38,7 +54,8 @@ if (Meteor.isClient) {
       };
       Operations.insert({
         name: text,
-        //owner: Meteor.userId(),
+        owner: Meteor.userId(),
+        createdAt: new Date(),
       })
       event.target.text.value = "";
     },
