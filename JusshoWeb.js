@@ -9,7 +9,16 @@ Operations.defaultName = function() {
   }
 };
 
+Accounts.config({
+  forbidClientAccountCreation: true,
+});
+
 if (Meteor.isClient) {
+
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_ONLY"
+  });
+
 
   Template.operations.helpers({
     operations: function() {
