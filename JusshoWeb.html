@@ -3,9 +3,13 @@
 </head>
 
 <body>
+    {{> home}}
+</body>
+
+<template name="home">
     {{> loginButtons}}
     {{> operationList}}
-</body>
+</template>
 
 <template name="operationList">
     <form class="new-operation">
