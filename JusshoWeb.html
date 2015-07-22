@@ -1,14 +1,20 @@
 <head>
-  <title>JusshoWeb</title>
+    <title>十将会</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+    {{> operations}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="operations">
+    <button class="new-operation">作戦を追加</button>
+    {{#each operations}}
+    {{> operation}}
+    {{/each}}
+</template>
+
+<template name="operation">
+    <div class="operation-view">
+        <span>{{name}}</span>
+    </div>
 </template>
