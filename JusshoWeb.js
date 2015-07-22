@@ -66,7 +66,10 @@ if (Meteor.isClient) {
       return this.owner === Meteor.userId();
     },
     ownerName: function() {
-      return Meteor.users.findOne(this.owner).username;
+      var owner = Meteor.users.findOne(this.owner);
+      if (owner) {
+        return owner.username;
+      };
     }
   });
 
