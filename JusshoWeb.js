@@ -147,6 +147,7 @@ if (Meteor.isClient) {
                         $addToSet: {photos: fileObj._id}
                     });
             });
+            event.target.value = null;
         }
     });
 }
