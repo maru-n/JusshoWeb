@@ -24,15 +24,29 @@ Operations.allow({
 //FS.debug = true;
 
 var createSquareThumb = function(fileObj, readStream, writeStream) {
-    var size = '96';
-    gm(readStream).autoOrient().resize(size, size + '^').gravity('Center').extent(size, size).stream('PNG').pipe(writeStream);
+    var width = 96;
+    var height = 96;
+    //gm(readStream).autoOrient().resize(size, size + '^').gravity('Center').extent(size, size).stream('PNG').pipe(writeStream);
+    gm(readStream, fileObj.name()).resize(width, height).stream().pipe(writeStream);
 };
 
+//var original_image_store = new FS.Store.GridFS('originals', {});
+var original_image_store = new FS.Store.S3("originals", {
+    region: "ap-northeast-1",
+    bucket: "maruyama.meteor-test",
+    folder: "originals",
+});
+
+//var thumbs_image_store = new FS.Store.GridFS("thumbs", { transformWrite: createSquareThumb })
+var thumbs_image_store = new FS.Store.S3("thumbs", {
+    region: "ap-northeast-1",
+    bucket: "maruyama.meteor-test",
+    folder: "thumbs",
+    transformWrite: createSquareThumb,
+});
+
 Photos = new FS.Collection('photos', {
-    stores: [
-    new FS.Store.GridFS('originals', {}),
-    new FS.Store.GridFS("thumbs", { transformWrite: createSquareThumb })
-    ],
+    stores: [original_image_store, thumbs_image_store],
     filter: {
       allow: {contentTypes: ['image/*']}
     }
