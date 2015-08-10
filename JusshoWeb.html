@@ -3,11 +3,20 @@
 </head>
 
 <body>
-    {{> loginButtons}}
-    {{> operationList}}
+    {{> home}}
 </body>
 
+<template name="home">
+    {{> loginButtons}}
+    {{> operationList}}
+    {{#if isOperationSelected}}
+    <hr>
+    {{> photoList}}
+    {{/if}}
+</template>
+
 <template name="operationList">
+    <h1>作戦一覧</h1>
     <form class="new-operation">
         <input type="text" name="text" placeholder="{{operationDefaultName}}" />
         <input type="submit" value="作戦を追加">
@@ -21,9 +30,23 @@
 
 <template name="operation">
     <li class="operation-view">
-        <span><strong>{{name}}</strong> ({{ownerName}})</span>
+        <a href="#" class="operation-link"><strong>{{name}}</strong></a> ({{ownerName}})
         {{#if isOwned}}
         <button class='delete'>削除</button>
         {{/if}}
     </li>
+</template>
+
+<template name="photoList">
+    <h1>{{currentOperationName}}</h1>
+    <form>
+        <input type="file" class="upload-photos" multiple>
+    </form>
+    {{#each photos}}
+    {{> photoThumb}}
+    {{/each}}
+</template>
+
+<template name="photoThumb">
+    <img src="{{url store='thumbs'}}" alt="" class="thumbnail" />
 </template>
