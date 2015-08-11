@@ -8,10 +8,12 @@
 
 <template name="home">
     {{> loginButtons}}
-    {{> operationList}}
-    {{#if isOperationSelected}}
-    <hr>
-    {{> photoList}}
+    {{#if currentUser}}
+        {{> operationList}}
+        {{#if isOperationSelected}}
+        <hr>
+        {{> photoList}}
+        {{/if}}
     {{/if}}
 </template>
 
