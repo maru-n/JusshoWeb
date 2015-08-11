@@ -48,5 +48,7 @@
 </template>
 
 <template name="photoThumb">
-    <img src="{{url store='thumbs'}}" alt="" class="thumbnail" />
+    <a href="{{url store='originals'}}" target="_blank">
+        <img src="{{url store='thumbs' uploading='/images/loading.gif' storing='/images/loading.gif'}}" alt="" class="thumbnail" />
+    </a>
 </template>
