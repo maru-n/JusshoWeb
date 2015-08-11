@@ -28,20 +28,26 @@ var createSquareThumb = function(fileObj, readStream, writeStream) {
     gm(readStream).autoOrient().resize(size, size + '^').gravity('Center').extent(size, size).stream('PNG').pipe(writeStream);
 };
 
-//var original_image_store = new FS.Store.GridFS('originals', {});
-var original_image_store = new FS.Store.S3("originals", {
-    region: "ap-northeast-1",
-    bucket: "maruyama.meteor-test",
-    folder: "originals",
-});
-
-//var thumbs_image_store = new FS.Store.GridFS("thumbs", { transformWrite: createSquareThumb })
-var thumbs_image_store = new FS.Store.S3("thumbs", {
-    region: "ap-northeast-1",
-    bucket: "maruyama.meteor-test",
-    folder: "thumbs",
-    transformWrite: createSquareThumb,
-});
+const USE_S3 = false;
+if (USE_S3) {
+    var original_image_store = new FS.Store.S3("originals", {
+        region: "ap-northeast-1",
+        bucket: "maruyama.meteor-test",
+        folder: "originals",
+    });
+    var thumbs_image_store = new FS.Store.S3("thumbs", {
+        region: "ap-northeast-1",
+        bucket: "maruyama.meteor-test",
+        folder: "thumbs",
+        transformWrite: createSquareThumb,
+    });
+} else {
+    var original_image_store = new FS.Store.FileSystem('originals', {
+    });
+    var thumbs_image_store = new FS.Store.FileSystem("thumbs", {
+        transformWrite: createSquareThumb
+    })
+}
 
 Photos = new FS.Collection('photos', {
     stores: [original_image_store, thumbs_image_store],
@@ -153,10 +159,10 @@ if (Meteor.isClient) {
 Meteor.methods({
     deleteOperation: function (operationId) {
         Photos.remove({
-                _id: {
-                    $in: Operations.findOne(operationId).photos
-                }
-            });
+            _id: {
+                $in: Operations.findOne(operationId).photos
+            }
+        });
         Operations.remove(operationId);
     },
 });
