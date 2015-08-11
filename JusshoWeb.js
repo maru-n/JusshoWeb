@@ -113,7 +113,7 @@ if (Meteor.isClient) {
 
     Template.operation.events({
         'click .delete': function(event) {
-            Operations.remove(this._id);
+            Meteor.call("deleteOperation", this._id);
         }
     });
 
@@ -150,6 +150,16 @@ if (Meteor.isClient) {
         }
     });
 }
+Meteor.methods({
+    deleteOperation: function (operationId) {
+        Photos.remove({
+                _id: {
+                    $in: Operations.findOne(operationId).photos
+                }
+            });
+        Operations.remove(operationId);
+    },
+});
 
 if (Meteor.isServer) {
     Meteor.startup(function () {
