@@ -1,3 +1,8 @@
+Accounts.ui.config({
+    passwordSignupFields: "USERNAME_AND_EMAIL"
+});
+
+
 Template.home.helpers({
     isOperationSelected: function() {
       return Session.get("currentOperationId");
