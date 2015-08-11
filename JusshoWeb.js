@@ -24,9 +24,8 @@ Operations.allow({
 //FS.debug = true;
 
 var createSquareThumb = function(fileObj, readStream, writeStream) {
-    var width = 96;
-    var height = 96;
-    gm(readStream, fileObj.name()).resize(width, height).stream().pipe(writeStream);
+    var size = 96;
+    gm(readStream).autoOrient().resize(size, size + '^').gravity('Center').extent(size, size).stream('PNG').pipe(writeStream);
 };
 
 //var original_image_store = new FS.Store.GridFS('originals', {});
