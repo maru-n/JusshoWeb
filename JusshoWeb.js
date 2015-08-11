@@ -145,7 +145,11 @@ if (Meteor.isClient) {
     Template.photoList.events({
         'change .upload-photos': function(event, template) {
             FS.Utility.eachFile(event, function(file) {
-                var fileObj = Photos.insert(file);
+                var newFile = new FS.File(file);
+                newFile.metadata = {
+                    owner: Meteor.userId()
+                }
+                var fileObj = Photos.insert(newFile);
                 Operations.update(
                     Session.get("currentOperationId"),
                     {
