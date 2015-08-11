@@ -21,6 +21,7 @@ Operations.allow({
     },
 });
 
+const USE_S3 = false;
 //FS.debug = true;
 
 var createSquareThumb = function(fileObj, readStream, writeStream) {
@@ -28,7 +29,6 @@ var createSquareThumb = function(fileObj, readStream, writeStream) {
     gm(readStream).autoOrient().resize(size, size + '^').gravity('Center').extent(size, size).stream('PNG').pipe(writeStream);
 };
 
-const USE_S3 = false;
 if (USE_S3) {
     var original_image_store = new FS.Store.S3("originals", {
         region: "ap-northeast-1",
