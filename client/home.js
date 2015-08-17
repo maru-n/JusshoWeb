@@ -68,7 +68,7 @@ Template.photoList.helpers({
     photos: function() {
         var currentOperation = Operations.findOne(Session.get("currentOperationId"));
         if (!currentOperation.photos) {
-            return;
+            return null;
         };
         var photos = Photos.find({
             _id: {
@@ -80,7 +80,7 @@ Template.photoList.helpers({
 });
 
 Template.photoList.events({
-    'change .upload-photos': function(event, template) {
+    'change .upload-photos': function(event) {
         FS.Utility.eachFile(event, function(file) {
             var newFile = new FS.File(file);
             newFile.metadata = {
