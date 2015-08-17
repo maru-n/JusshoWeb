@@ -1,0 +1,8 @@
+{
+    "awsS3": true,
+    "awsS3Region": "XXXXXXXX",
+    "awsS3Bucket": "XXXXXXXX",
+    "awsAccessKeyId": "XXXXXXXX",
+    "awsSecretKey": "XXXXXXXX",
+    "public": {}
+}
