@@ -4,5 +4,18 @@
     "awsS3Bucket": "XXXXXXXX",
     "awsAccessKeyId": "XXXXXXXX",
     "awsSecretKey": "XXXXXXXX",
+    "adminUserName": "admin",
+    "adminUserPassword": "password",
+    "adminUserEmail": "admin@example.com",
+    "defaultUsers": [
+    {
+        "name": "name1",
+        "password": "password",
+        "email": "name1@example.com"
+    },{
+        "name": "name2",
+        "password": "password",
+        "email": "name2@example.com"
+    }],
     "public": {}
 }
