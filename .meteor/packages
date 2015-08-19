@@ -9,3 +9,9 @@ autopublish
 insecure
 accounts-ui
 accounts-password
+cfs:standard-packages
+cfs:gridfs
+cfs:graphicsmagick
+cfs:s3
+cfs:filesystem
+alanning:roles

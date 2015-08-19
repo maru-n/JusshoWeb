@@ -1,0 +1,56 @@
+<head>
+    <title>十将会</title>
+</head>
+
+<body>
+    {{> home}}
+</body>
+
+<template name="home">
+    {{> loginButtons}}
+    {{#if currentUser}}
+        {{> operationList}}
+        {{#if isOperationSelected}}
+        <hr>
+        {{> photoList}}
+        {{/if}}
+    {{/if}}
+</template>
+
+<template name="operationList">
+    <h1>作戦一覧</h1>
+    <form class="new-operation">
+        <input type="text" name="text" placeholder="{{operationDefaultName}}" />
+        <input type="submit" value="作戦を追加">
+    </form>
+    <ul>
+    {{#each operations}}
+    {{> operation}}
+    {{/each}}
+    </ul>
+</template>
+
+<template name="operation">
+    <li class="operation-view">
+        <a href="#" class="operation-link"><strong>{{name}}</strong></a> ({{ownerName}})
+        {{#if isOwned}}
+        <button class='delete'>削除</button>
+        {{/if}}
+    </li>
+</template>
+
+<template name="photoList">
+    <h1>{{currentOperationName}}</h1>
+    <form>
+        <input type="file" class="upload-photos" multiple>
+    </form>
+    {{#each photos}}
+    {{> photoThumb}}
+    {{/each}}
+</template>
+
+<template name="photoThumb">
+    <a href="{{url store='originals'}}" target="_blank">
+        <img src="{{url store='thumbs' uploading='/images/loading.gif' storing='/images/loading.gif'}}" alt="" class="thumbnail" />
+    </a>
+</template>
