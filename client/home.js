@@ -65,6 +65,9 @@ Template.photoList.helpers({
         var currentOperation = Operations.findOne(Session.get("currentOperationId"));
         return currentOperation.name;
     },
+    currentOperationId: function() {
+        return Session.get("currentOperationId");
+    },
     photos: function() {
         var currentOperation = Operations.findOne(Session.get("currentOperationId"));
         if (!currentOperation.photos) {
