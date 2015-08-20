@@ -15,3 +15,5 @@ cfs:graphicsmagick
 cfs:s3
 cfs:filesystem
 alanning:roles
+classcraft:archiver
+iron:router
