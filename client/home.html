@@ -39,6 +39,9 @@
     {{#each photos}}
     {{> photoThumb}}
     {{/each}}
+    {{#if photos}}
+    <a href="/operation/{{currentOperationId}}/photos.zip">全てダウンロード</a>
+    {{/if}}
 </template>
 
 <template name="photoThumb">
