@@ -97,5 +97,8 @@ Template.photoList.events({
                 });
         });
         event.target.value = null;
+    },
+    'click .delete-all-photos': function(event) {
+        Meteor.call("deleteAllPhotos", Session.get("currentOperationId"));
     }
 });
