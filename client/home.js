@@ -5,8 +5,14 @@ Accounts.ui.config({
 
 Template.home.helpers({
     isOperationSelected: function() {
-      return Session.get("currentOperationId");
-  },
+        return Session.get("currentOperationId");
+    },
+    isUserUploading: function(){
+        var photos = Photos.find({
+            owner: Meteor.userId()
+        });
+        return photos;
+    },
 });
 
 Template.operationList.helpers({
