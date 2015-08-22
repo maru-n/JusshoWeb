@@ -1,11 +1,9 @@
 <template name="home">
     {{> loginButtons}}
-    {{#if currentUser}}
-        {{> operationList}}
-        {{#if isOperationSelected}}
-        <hr>
-        {{> photoList}}
-        {{/if}}
+    {{> operationList}}
+    {{#if isOperationSelected}}
+    <hr>
+    {{> photoList}}
     {{/if}}
 </template>
 
