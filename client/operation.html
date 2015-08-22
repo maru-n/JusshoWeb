@@ -1,0 +1,23 @@
+<template name="operation">
+    <h1>{{name}}</h1>
+
+    <a href="/">戻る</a>
+    {{#if isOwned}}<a href="/" class='delete'>この作戦を削除</a>{{/if}}
+    {{#if photos}}<a href="/operation/{{currentOperationId}}/photos.zip">全てダウンロード</a>{{/if}}
+    {{#if photos}}{{#if isOwned}}<a href="" class='delete-all-photos'>全ての写真を削除</a>{{/if}}{{/if}}
+
+    <form>
+        <p><label for="upload-photos">写真をアップロード</label><input type="file" name="upload-photos" class="upload-photos" multiple></p>
+    </form>
+
+    {{#each photos}}
+    {{> photoThumb}}
+    {{/each}}
+
+</template>
+
+<template name="photoThumb">
+    <a href="{{url store='originals'}}" target="_blank">
+        <img src="{{url store='thumbs' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail" />
+    </a>
+</template>

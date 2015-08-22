@@ -20,3 +20,4 @@ kadira:debug
 meteorhacks:zones
 meteorhacks:kadira-profiler
 autopublish
+insecure

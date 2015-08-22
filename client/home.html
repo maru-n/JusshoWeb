@@ -1,10 +1,5 @@
 <template name="home">
-    {{> loginButtons}}
     {{> operationList}}
-    {{#if isOperationSelected}}
-    <hr>
-    {{> photoList}}
-    {{/if}}
 </template>
 
 <template name="operationList">
@@ -15,36 +10,9 @@
     </form>
     <ul>
     {{#each operations}}
-    {{> operation}}
+    <li>
+        <a href="/operation/{{_id}}" class="operation"><strong>{{name}}</strong></a> ({{ownerName}})
+    </li>
     {{/each}}
     </ul>
-</template>
-
-<template name="operation">
-    <li class="operation-view">
-        <a href="#" class="operation-link"><strong>{{name}}</strong></a> ({{ownerName}})
-        {{#if isOwned}}
-        <button class='delete'>削除</button>
-        {{/if}}
-    </li>
-</template>
-
-<template name="photoList">
-    <h1>{{currentOperationName}}</h1>
-    <form>
-        <input type="file" class="upload-photos" multiple>
-    </form>
-    {{#each photos}}
-    {{> photoThumb}}
-    {{/each}}
-    {{#if photos}}
-    <a href="/operation/{{currentOperationId}}/photos.zip">全てダウンロード</a>
-    <button class='delete-all-photos'>全ての写真を削除</button>
-    {{/if}}
-</template>
-
-<template name="photoThumb">
-    <a href="{{url store='originals'}}" target="_blank">
-        <img src="{{url store='thumbs' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail" />
-    </a>
 </template>
