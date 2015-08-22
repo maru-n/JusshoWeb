@@ -1,4 +1,7 @@
 {
+    "public": {
+        "underConstruction": false
+    },
     "awsS3": true,
     "awsS3Region": "XXXXXXXX",
     "awsS3Bucket": "XXXXXXXX",
@@ -16,6 +19,13 @@
         "name": "name2",
         "password": "password",
         "email": "name2@example.com"
+    },{
+        "name": "name3",
+        "password": "password",
+        "email": "name3@example.com"
     }],
-    "public": {}
+    "kadira": {
+        "appId": "XXXXX",
+        "appSecret": "XXXXX"
+    }
 }
