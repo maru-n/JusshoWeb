@@ -32,14 +32,7 @@ Template.operationList.events({
     'submit .new-operation': function(event) {
         event.preventDefault();
         var text = event.target.text.value;
-        if (!text) {
-            text = Operations.defaultName();
-        };
-        Operations.insert({
-            name: text,
-            owner: Meteor.userId(),
-            createdAt: new Date(),
-        })
+        Meteor.call("createOperation", text);
         event.target.text.value = "";
     },
     'click .operation-link': function(event) {
@@ -91,16 +84,18 @@ Template.photoList.helpers({
 Template.photoList.events({
     'change .upload-photos': function(event) {
         FS.Utility.eachFile(event, function(file) {
+            //Meteor.call("createPhoto", file, Session.get("currentOperationId"));
+            var operationId = Session.get("currentOperationId");
             var newFile = new FS.File(file);
             newFile.metadata = {
                 owner: Meteor.userId()
             }
-            var fileObj = Photos.insert(newFile);
-            Operations.update(
-                Session.get("currentOperationId"),
-                {
-                    $addToSet: {photos: fileObj._id}
-                });
+            var fileObj = Photos.insert(newFile, function(){
+
+            });
+            Operations.update(operationId, {
+                $addToSet: {photos: fileObj._id}
+            });
         });
         event.target.value = null;
     },

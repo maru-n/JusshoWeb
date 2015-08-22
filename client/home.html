@@ -1,11 +1,9 @@
 <template name="home">
     {{> loginButtons}}
-    {{#if currentUser}}
-        {{> operationList}}
-        {{#if isOperationSelected}}
-        <hr>
-        {{> photoList}}
-        {{/if}}
+    {{> operationList}}
+    {{#if isOperationSelected}}
+    <hr>
+    {{> photoList}}
     {{/if}}
 </template>
 
@@ -47,6 +45,6 @@
 
 <template name="photoThumb">
     <a href="{{url store='originals'}}" target="_blank">
-        <img src="{{url store='thumbs' uploading='/images/loading.gif' storing='/images/loading.gif'}}" alt="" class="thumbnail" />
+        <img src="{{url store='thumbs' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail" />
     </a>
 </template>
