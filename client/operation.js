@@ -1,3 +1,5 @@
+Meteor.subscribe("photos");
+
 Template.operation.helpers({
     photos: function() {
         if (!this.photos) { return null; };
