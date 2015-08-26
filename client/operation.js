@@ -11,8 +11,11 @@ Template.operation.helpers({
         });
         return photos;
     },
-    isOwned: function() {
-        return this.owner === Meteor.userId();
+    canRemoveAllPhotos: function() {
+        var userId = Meteor.userId();
+        var isOwned = (this.owner === userId);
+        var isAdmin = Roles.userIsInRole(userId, 'admin');
+        return isOwned || isAdmin;
     },
     isFileUploading: function() {
         var num = Meteor.call("getUploadingFileNum");
