@@ -7,9 +7,15 @@
     {{#if photos}}<a href="/operation/{{currentOperationId}}/photos.zip">全てダウンロード</a>{{/if}}
     {{#if photos}}{{#if isOwned}}<a href="" class='delete-all-photos'>全ての写真を削除</a>{{/if}}{{/if}}
 
-    <form>
-        <p><label for="upload-photos">写真をアップロード</label><input type="file" name="upload-photos" class="upload-photos" multiple></p>
-    </form>
+    {{#if userUploadStatus}}
+    {{#with userUploadStatus}}
+        <p><strong>{{operation}}にアップロード中:{{finishedNum}} / {{totalNum}}</strong></p>
+    {{/with}}
+    {{else}}
+        <form>
+            <p><label for="upload-photos">写真をアップロード</label><input type="file" name="upload-photos" class="upload-photos" multiple></p>
+        </form>
+    {{/if}}
 
     {{#each photos}}
     {{> photoThumb}}
