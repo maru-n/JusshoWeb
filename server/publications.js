@@ -1,3 +1,9 @@
+Meteor.publish("allUserName", function () {
+    return Meteor.users.find({},
+        {fields: {'username': 1}
+    });
+});
+
 Meteor.publish("operations", function () {
     return Operations.find();
 });

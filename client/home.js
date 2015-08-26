@@ -3,6 +3,7 @@ Accounts.ui.config({
 });
 
 Meteor.subscribe("operations");
+Meteor.subscribe("allUserName");
 
 Template.home.helpers({
 });
