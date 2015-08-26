@@ -1,3 +1,7 @@
 settings.json
 mup.json
 .DS_Store
+Dockerfile
+Dockerrun.aws.json
+.ebextensions/01_files.config
+.ebextensions/02_app.config
