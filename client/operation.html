@@ -24,7 +24,9 @@
 </template>
 
 <template name="photoThumb">
+    {{#if hasStored 'thumbs'}}
     <a href="{{url store='originals'}}" target="_blank">
-        <img src="{{url store='thumbs' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail" />
+        <img src="{{url store='thumbs'}}" alt="" class="thumbnail" />
     </a>
+    {{/if}}
 </template>
