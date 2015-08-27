@@ -11,7 +11,7 @@ Template.operation.helpers({
         });
         return photos;
     },
-    canRemoveAllPhotos: function() {
+    editPermitted: function() {
         var userId = Meteor.userId();
         var isOwned = (this.owner === userId);
         var isAdmin = Roles.userIsInRole(userId, 'admin');
@@ -25,6 +25,8 @@ Template.operation.helpers({
         var uploadTask = UploadTasks.findOne({user: Meteor.userId()},{
             sort: {createdAt: -1}
         });
+        if (!uploadTask) { return null; }
+
         var photos = Photos.find({
             _id: {
                 $in: uploadTask.uploadingPhotos
@@ -37,15 +39,15 @@ Template.operation.helpers({
                 finishedNum += 1;
             }
         });
+        if (totalNum == finishedNum) { return null; }
+
         var operation = Operations.findOne(uploadTask.operation);
-        if (!operation || (totalNum == finishedNum)) {
-            return null;
-        } else {
-            return {
-                operation: operation.name,
-                totalNum: totalNum,
-                finishedNum: finishedNum
-            }
+        if (!operation) { return null; }
+
+        return {
+            operation: operation.name,
+            totalNum: totalNum,
+            finishedNum: finishedNum
         }
     }
 });
@@ -59,7 +61,6 @@ Template.operation.events({
             user: Meteor.userId(),
             createdAt: new Date(),
             operation: targetOperationId,
-            photos: []
         });
         FS.Utility.eachFile(event, function(file) {
             var newFile = new FS.File(file);
