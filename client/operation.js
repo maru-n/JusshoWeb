@@ -20,13 +20,6 @@ Template.operation.helpers({
 
     isUploading: function() {
         return (Session.get("uploading_file_num") !== Session.get("uploaded_file_num"));
-        /*
-        if (!Meteor.user().profile) {
-            return false;
-        };
-        */
-        //var uploading_file_num = Meteor.user().profile.uploading_file_num || 0;
-        //var uploaded_file_num = Meteor.user().profile.uploaded_file_num || 0;
         return (uploading_file_num !== uploaded_file_num);
     },
 
@@ -53,20 +46,7 @@ Template.operation.events({
         Session.set("upload_operation", this.name);
         Session.set("upload_error_files", []);
         _.each(files, function (file) {
-            var uploader = new Slingshot.Upload("photos");
-
-            uploader.send(file, function (error, downloadUrl) {
-                Session.set("uploaded_file_num", Session.get("uploaded_file_num")+1);
-                if (error) {
-                    //console.error(uploader.xhr.response)
-                    //console.error(error);
-                    var errorFiles = Session.get("upload_error_files");
-                    errorFiles.push(file.name);
-                    Session.set("upload_error_files", errorFiles);
-                } else {
-                    Meteor.call("createPhoto", downloadUrl, targetOperationId);
-                }
-            });
+            Photos.insertFile(file, targetOperationId);
         });
         event.target.value = null;
     },
@@ -94,7 +74,7 @@ Template.uploadErrorNotification.helpers({
     isErrorOccured: function() {
         var error_files = Session.get("upload_error_files");
         if (error_files) {
-        return (error_files.length !== 0);
+            return (error_files.length !== 0);
         } else {
             return false;
         }

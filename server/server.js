@@ -20,16 +20,16 @@ Meteor.startup(function () {
 
 
 Slingshot.createDirective("photos", Slingshot.S3Storage, {
-    bucket: "marun.test",
+    bucket: Meteor.settings.AWSS3Bucket,
     acl: "public-read",
-    authorize: function () {
+    authorize: function (file, metaContext) {
         if (!this.userId) {
             var message = "Please login before posting files";
             throw new Meteor.Error("Login Required", message);
         }
         return true;
     },
-    key: function (file) {
-        return "images/" + file.name;
+    key: function (file, metaContext) {
+        return "originals/" + metaContext.operationId + "/" + file.name;
     }
 });
