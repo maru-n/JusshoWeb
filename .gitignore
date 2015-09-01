@@ -5,3 +5,5 @@ Dockerfile
 Dockerrun.aws.json
 .ebextensions/01_files.config
 .ebextensions/02_app.config
+.submodules/awslambda_create_thumbnail/node_modules
+deploy_awslambda.sh

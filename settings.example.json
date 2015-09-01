@@ -2,11 +2,10 @@
     "public": {
         "underConstruction": false
     },
-    "awsS3": true,
-    "awsS3Region": "XXXXXXXX",
-    "awsS3Bucket": "XXXXXXXX",
-    "awsAccessKeyId": "XXXXXXXX",
-    "awsSecretKey": "XXXXXXXX",
+    "AWSAccessKeyId": "XXXXX",
+    "AWSSecretAccessKey": "XXXXX",
+    "AWSRegion": "ap-northeast-1",
+    "AWSS3Bucket": "XXXXXX",
     "adminUserName": "admin",
     "adminUserPassword": "password",
     "adminUserEmail": "admin@example.com",

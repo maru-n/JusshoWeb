@@ -1,32 +1,46 @@
 <template name="operation">
     {{> loginButtons}}
+
+    {{> uploadErrorNotification}}
+
     <h1>{{name}}</h1>
 
     <a href="/">戻る</a>
-    {{#if photos}}<a href="#">全てダウンロード（工事中！）</a>{{/if}}
-    {{#if isOwned}}<a href="/" class='delete'>この作戦を削除</a>{{/if}}
-    {{#if photos}}{{#if canRemoveAllPhotos}}<a href="" class='delete-all-photos'>全ての写真を削除</a>{{/if}}{{/if}}
+    {{#if isEditPermitted}}
+    <a href="/" class='delete'>この作戦を削除</a>
+    <a href="" class='delete-all-photos'>全ての写真を削除</a>
+    {{/if}}
 
-    {{#if userUploadStatus}}
-    {{#with userUploadStatus}}
-        <p><strong>{{operation}}にアップロード中（{{finishedNum}} / {{totalNum}}）。壊れるから同時アップロード禁止！</strong></p>
-    {{/with}}
+
+    {{#if isUploading}}
+    <p><strong>
+    {{uploadOperation}}にアップロード中（{{uploadedFileNum}}/{{uploadingFileNum}}）
+    </strong></p>
     {{else}}
-        <form>
-            <p><label for="upload-photos">写真をアップロード</label><input type="file" name="upload-photos" class="upload-photos" multiple></p>
-        </form>
+    <form>
+        <p><label for="upload-photos">写真をアップロード</label><input type="file" name="upload-photos" class="upload-photos" multiple></p>
+    </form>
     {{/if}}
 
     {{#each photos}}
-    {{> photoThumb}}
+    {{> photoThumbnail}}
     {{/each}}
 
 </template>
 
-<template name="photoThumb">
-    {{#if hasStored 'thumbs'}}
-    <a href="{{url store='originals'}}" target="_blank">
-        <img src="{{url store='thumbs'}}" alt="" class="thumbnail" />
-    </a>
+<template name="uploadErrorNotification">
+    {{#if isErrorOccured}}
+    <p style="color:red;">{{errorOperation}}への以下のファイルのアップロードに失敗しました。<a href="" class='delete-error'>了解</a></p>
+    <ul>
+    {{#each errorFileNames}}
+    <li>{{this}}</li>
+    {{/each}}
+    </ul>
     {{/if}}
+</template>
+
+<template name="photoThumbnail">
+    <a href="{{originalUrl}}" target="_blank">
+        <img src="{{thumbnailUrl}}" alt="" />
+    </a>
 </template>
