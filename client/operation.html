@@ -3,8 +3,11 @@
     <h1>{{name}}</h1>
 
     <a href="/">戻る</a>
-    {{#if isOwned}}<a href="/" class='delete'>この作戦を削除</a>{{/if}}
-    {{#if photos}}{{#if canRemoveAllPhotos}}<a href="" class='delete-all-photos'>全ての写真を削除</a>{{/if}}{{/if}}
+    {{#if isEditPermitted}}
+    <a href="/" class='delete'>この作戦を削除</a>
+    <a href="" class='delete-all-photos'>全ての写真を削除</a>
+    {{/if}}
+
 
     {{#if userUploadStatus}}
     {{#with userUploadStatus}}

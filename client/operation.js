@@ -11,7 +11,7 @@ Template.operation.helpers({
         });
         return photos;
     },
-    editPermitted: function() {
+    isEditPermitted: function() {
         var userId = Meteor.userId();
         var isOwned = (this.owner === userId);
         var isAdmin = Roles.userIsInRole(userId, 'admin');
