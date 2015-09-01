@@ -11,8 +11,3 @@ Meteor.publish("operations", function () {
 Meteor.publish("photos", function () {
     return Photos.find();
 });
-
-Meteor.publish("uploadTasks", function() {
-    return UploadTasks.find();
-});
-

@@ -17,3 +17,19 @@ Meteor.startup(function () {
         });
     }
 });
+
+
+Slingshot.createDirective("photos", Slingshot.S3Storage, {
+    bucket: "marun.test",
+    acl: "public-read",
+    authorize: function () {
+        if (!this.userId) {
+            var message = "Please login before posting files";
+            throw new Meteor.Error("Login Required", message);
+        }
+        return true;
+    },
+    key: function (file) {
+        return "images/" + file.name;
+    }
+});

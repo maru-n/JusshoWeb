@@ -3,7 +3,6 @@
     <h1>{{name}}</h1>
 
     <a href="/">戻る</a>
-    {{#if photos}}<a href="#">全てダウンロード（工事中！）</a>{{/if}}
     {{#if isOwned}}<a href="/" class='delete'>この作戦を削除</a>{{/if}}
     {{#if photos}}{{#if canRemoveAllPhotos}}<a href="" class='delete-all-photos'>全ての写真を削除</a>{{/if}}{{/if}}
 
@@ -18,15 +17,13 @@
     {{/if}}
 
     {{#each photos}}
-    {{> photoThumb}}
+    {{> photoThumbnail}}
     {{/each}}
 
 </template>
 
-<template name="photoThumb">
-    {{#if hasStored 'thumbs'}}
-    <a href="{{url store='originals'}}" target="_blank">
-        <img src="{{url store='thumbs'}}" alt="" class="thumbnail" />
+<template name="photoThumbnail">
+    <a href="{{originalUrl}}" target="_blank">
+        <img src="{{thumbnailUrl}}" alt="" />
     </a>
-    {{/if}}
 </template>
