@@ -7,11 +7,6 @@
 meteor-platform
 accounts-ui
 accounts-password
-cfs:standard-packages
-cfs:gridfs
-cfs:graphicsmagick
-cfs:s3
-cfs:filesystem
 alanning:roles
 classcraft:archiver
 iron:router
@@ -19,4 +14,4 @@ meteorhacks:kadira
 kadira:debug
 meteorhacks:zones
 meteorhacks:kadira-profiler
-insecure
+edgee:slingshot
