@@ -93,7 +93,11 @@ Template.photoThumbnail.helpers({
 Template.uploadErrorNotification.helpers({
     isErrorOccured: function() {
         var error_files = Session.get("upload_error_files");
+        if (error_files) {
         return (error_files.length !== 0);
+        } else {
+            return false;
+        }
     },
 
     errorFileNames: function() {
