@@ -40,7 +40,9 @@
 </template>
 
 <template name="photoThumbnail">
-    <a href="{{originalUrl}}" target="_blank">
-        <img src="{{thumbnailUrl}}" alt="" />
+    {{#if thumbnail.url}}
+    <a href="{{original.url}}" target="_blank">
+        <img src="{{thumbnail.url}}" alt="" />
     </a>
+    {{/if}}
 </template>

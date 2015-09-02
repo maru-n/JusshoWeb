@@ -60,16 +60,6 @@ Template.operation.events({
     },
 });
 
-Template.photoThumbnail.helpers({
-    originalUrl: function() {
-        return this.original.url;
-    },
-
-    thumbnailUrl: function() {
-        return this.thumbnail.url;
-    }
-});
-
 Template.uploadErrorNotification.helpers({
     isErrorOccured: function() {
         var error_files = Session.get("upload_error_files");
