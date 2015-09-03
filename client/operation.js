@@ -1,11 +1,16 @@
 Meteor.subscribe("photos");
 
+
 Template.operation.helpers({
     photos: function() {
         if (!this.photos) { return null; };
         var photos = Photos.find({
             _id: {
                 $in: this.photos
+            }
+        },{
+            sort: {
+                name: 1
             }
         });
         return photos;
@@ -20,7 +25,6 @@ Template.operation.helpers({
 
     isUploading: function() {
         return (Session.get("uploading_file_num") !== Session.get("uploaded_file_num"));
-        return (uploading_file_num !== uploaded_file_num);
     },
 
     uploadingFileNum: function() {
@@ -32,22 +36,42 @@ Template.operation.helpers({
     },
 
     uploadOperation: function() {
-        return Session.get("upload_operation");
+        return Operations.findOne(Session.get("uploading_operation")).name;
     },
 
+    uploadFailedNum: function() {
+        return Session.get("upload_failed_file_num");
+    },
 });
 
+
+var uploadFailedFiles = [];
+
+function uploadFiles(files, operationId) {
+    _.each(files, function (file) {
+        Photos.insertFileBelongedOperation(file, operationId, function(error, objectId){
+            Session.set("uploaded_file_num", Session.get("uploaded_file_num")+1);
+            if (error) {
+                console.error(error);
+                Session.set("upload_failed_file_num", Session.get("upload_failed_file_num")+1);
+                uploadFailedFiles.push(file);
+            }else{
+
+            }
+        });
+    });
+}
+
+
 Template.operation.events({
-    'change .upload-photos': function(event) {
+    'change .upload-files': function(event) {
         var files = event.target.files;
-        var targetOperationId = this._id;
+        Session.set("uploading_operation", this._id);
         Session.set("uploading_file_num", files.length);
         Session.set("uploaded_file_num", 0);
-        Session.set("upload_operation", this.name);
-        Session.set("upload_error_files", []);
-        _.each(files, function (file) {
-            Photos.insertFile(file, targetOperationId);
-        });
+        Session.set("upload_failed_file_num", 0);
+        uploadFailedFiles = [];
+        uploadFiles(files, this._id);
         event.target.value = null;
     },
 
@@ -58,30 +82,19 @@ Template.operation.events({
     'click .delete-all-photos': function(event) {
         Meteor.call("deleteAllPhotos", this._id);
     },
-});
 
-Template.uploadErrorNotification.helpers({
-    isErrorOccured: function() {
-        var error_files = Session.get("upload_error_files");
-        if (error_files) {
-            return (error_files.length !== 0);
-        } else {
-            return false;
-        }
+    'click .retry-upload-files': function(event) {
+        var files = uploadFailedFiles;
+        Session.set("upload_failed_file_num", 0);
+        uploadFailedFiles = [];
+
+        Session.set("uploading_file_num", files.length);
+        Session.set("uploaded_file_num", 0);
+        uploadFiles(files, Session.get("uploading_operation"));
     },
 
-    errorFileNames: function() {
-        return Session.get("upload_error_files");
+    'click .delete-failed-files': function(event) {
+        Session.set("upload_failed_file_num", 0);
+        upladFailedFiles = [];
     },
-
-    errorOperation: function() {
-        return Session.get("upload_operation");
-    }
-
-});
-
-Template.uploadErrorNotification.events({
-    'click .delete-error': function(event) {
-        Session.set("upload_error_files", []);
-    }
 });
