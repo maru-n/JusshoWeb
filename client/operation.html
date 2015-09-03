@@ -1,8 +1,6 @@
 <template name="operation">
     {{> loginButtons}}
 
-    {{> uploadErrorNotification}}
-
     <h1>{{name}}</h1>
 
     <a href="/">戻る</a>
@@ -13,30 +11,27 @@
 
 
     {{#if isUploading}}
-    <p><strong>
-    {{uploadOperation}}にアップロード中（{{uploadedFileNum}}/{{uploadingFileNum}}）
-    </strong></p>
+    <p>
+        <strong>{{uploadOperation}}にアップロード中（{{uploadedFileNum}}/{{uploadingFileNum}}）</strong>
+    </p>
+    {{else}}{{#if uploadFailedNum}}
+    <p>
+        <span style="color:red;">{{uploadOperation}}への{{uploadFailedNum}}枚のアップロードに失敗しました。</span>
+        <a href="" class='retry-upload-files'>{{uploadFailedNum}}枚を再アップロード</a> <a href="" class='delete-failed-files'>閉じる</a>
+    </p>
     {{else}}
     <form>
-        <p><label for="upload-photos">写真をアップロード</label><input type="file" name="upload-photos" class="upload-photos" multiple></p>
+        <p>
+            <label for="upload-files">写真をアップロード</label>
+            <input type="file" name="upload-files" class="upload-files" multiple>
+        </p>
     </form>
-    {{/if}}
+    {{/if}}{{/if}}
 
     {{#each photos}}
     {{> photoThumbnail}}
     {{/each}}
 
-</template>
-
-<template name="uploadErrorNotification">
-    {{#if isErrorOccured}}
-    <p style="color:red;">{{errorOperation}}への以下のファイルのアップロードに失敗しました。<a href="" class='delete-error'>了解</a></p>
-    <ul>
-    {{#each errorFileNames}}
-    <li>{{this}}</li>
-    {{/each}}
-    </ul>
-    {{/if}}
 </template>
 
 <template name="photoThumbnail">
