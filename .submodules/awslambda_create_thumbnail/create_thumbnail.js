@@ -47,7 +47,8 @@ exports.handler = function(event, context) {
                 },
                 next);
             }
-        ], function (err) {
+        ],
+        function (err, data) {
             if (err) {
                 console.error(
                     'Unable to resize ' + bucket + '/' + srcKey +
@@ -55,6 +56,7 @@ exports.handler = function(event, context) {
                     ' due to an error: ' + err
                 );
             } else {
+                console.log(data);
                 console.log(
                     'Successfully resized ' + bucket + '/' + srcKey +
                     ' and uploaded to ' + bucket + '/' + dstKey
