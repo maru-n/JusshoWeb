@@ -16,3 +16,4 @@ meteorhacks:zones
 meteorhacks:kadira-profiler
 edgee:slingshot
 peerlibrary:aws-sdk
+peerlibrary:async
