@@ -6,6 +6,9 @@ Meteor.subscribe("operations");
 Meteor.subscribe("allUserName");
 
 Template.home.helpers({
+    isAdmin: function() {
+        return Roles.userIsInRole(Meteor.userId(), 'admin');
+    }
 });
 
 Template.operationList.helpers({
