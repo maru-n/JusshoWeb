@@ -1,11 +1,22 @@
-<template name="photoGallery">
+<template name="photoList">
     <div class="my-gallery thumbnail-list" itemscope itemtype="http://schema.org/ImageGallery">
-        {{#each photos}}
-        {{> photoThumbnail2}}
-        {{/each}}
+    {{#each this}}
+    {{> photoThumbnail}}
+    {{/each}}
     </div>
+    {{>photoSwipeGallery}}
+</template>
 
+<template name="photoThumbnail">
+    <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+        <a href="{{original.url}}" itemprop="contentUrl" data-size="3344x2224">
+            <img src="{{thumbnail.url}}" itemprop="thumbnail" alt="{{name}}" />
+        </a>
+        <figcaption itemprop="caption description">{{name}}</figcaption>
+    </figure>
+</template>
 
+<template name="photoSwipeGallery">
     <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="pswp__bg"></div>
         <div class="pswp__scroll-wrap">
@@ -42,13 +53,4 @@
         </div>
     </div>
 </div>
-</template>
-
-<template name="photoThumbnail2">
-    <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-        <a href="{{original.url}}" itemprop="contentUrl" data-size="3344x2224">
-            <img src="{{thumbnail.url}}" itemprop="thumbnail" alt="{{name}}" />
-        </a>
-        <figcaption itemprop="caption description">{{name}}</figcaption>
-    </figure>
 </template>

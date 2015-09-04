@@ -1,17 +1,4 @@
-Template.photoGallery.helpers({
-    photos: function() {
-        var photos = Photos.find({},{
-            sort: {
-                name: 1
-            }
-        });
-        return photos;
-    },
-
-})
-
-
-Template.photoGallery.onRendered(function(){
+Template.photoList.onRendered(function(){
     gallerySelector = '.my-gallery';
 
     var parseThumbnailElements = function(el) {
