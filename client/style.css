@@ -1,12 +1,3 @@
-.thumbnail-list {
-}
-
-.thumbnail-list img{
-    display: block;
-    margin: 0 auto;
-    padding: 0;
-}
-
 .thumbnail-list figure{
     margin: 0;
     float: left;
