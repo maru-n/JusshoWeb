@@ -17,3 +17,8 @@ meteorhacks:kadira-profiler
 edgee:slingshot
 peerlibrary:aws-sdk
 peerlibrary:async
+yogiben:admin
+fortawesome:fontawesome
+aldeed:collection2
+dburles:collection-helpers
+twbs:bootstrap
