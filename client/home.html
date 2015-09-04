@@ -1,5 +1,8 @@
 <template name="home">
     {{> loginButtons}}
+    {{#if isAdmin}}
+    <a href="/admin">管理ページ</a>
+    {{/if}}
     {{> operationList}}
 </template>
 
