@@ -202,11 +202,11 @@ Template.photoList.onRendered(function(){
 
 Template.photoThumbnail.helpers({
     geometry: function(){
-        if (!this.exif || !this.exif.size) {
+        if (!this.size) {
             return null;
         };
-        var w = this.exif.size.width;
-        var h = this.exif.size.height;
+        var w = this.size.width;
+        var h = this.size.height;
         return w + "x" + h;
     }
 });

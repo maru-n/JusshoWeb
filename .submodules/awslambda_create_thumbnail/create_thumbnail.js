@@ -7,13 +7,19 @@ var mongodb = require('mongodb');
 var WIDTH = 60;
 var THUMBNAIL_IMAGE_TYPE = 'jpg';
 
-var MONGO_URL = 'mongodb://jusshoweb:QqZnHrMhGLT4RmGn@jussho.top/jusshoweb_develop'
+// map bucket -> mongo_url
+var MONGO_URL_MAP = {
+    'marun.test': 'mongodb://jusshoweb:QqZnHrMhGLT4RmGn@jussho.top/jusshoweb_develop',  // develop
+    'jusshoweb' : 'mongodb://jusshoweb:QqZnHrMhGLT4RmGn@jussho.top/jusshoweb'  // production
+}
+
 
 var s3 = new AWS.S3({apiVersion: '2006-03-01'});
 
 exports.handler = function(event, context) {
     console.log("Reading options from event:\n", util.inspect(event, {depth: 5}));
     var bucket = event.Records[0].s3.bucket.name;
+    var mongoUrl = MONGO_URL_MAP[bucket];
     var originalKey = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
     var thumbnailKey = originalKey.replace("originals/", "thumbnails/");
     var originalUrl = "https://s3-ap-northeast-1.amazonaws.com/" + bucket + "/" + originalKey;
@@ -69,25 +75,25 @@ exports.handler = function(event, context) {
             });
         },
         function connectDB(exifData, next) {
-            mongodb.MongoClient.connect(MONGO_URL, function(err, database) {
+            mongodb.MongoClient.connect(mongoUrl, function(err, database) {
                 next(err, database, exifData);
             });
         },
         function insertPhotoDocument(db, exifData, next) {
-            photos = db.collection("photos");
-            photos.update({_id: photoId}, {
-                $set: {
-                    original: {
-                        url: originalUrl,
-                        s3Key: originalKey
-                    },
-                    thumbnail: {
-                        url: thumbnailUrl,
-                        s3Key: thumbnailKey,
-                    },
-                    exif: exifData
-                }
-            }, next);
+            var photos = db.collection("photos");
+            var fields = {
+                original: {
+                    url: originalUrl,
+                    s3Key: originalKey
+                },
+                thumbnail: {
+                    url: thumbnailUrl,
+                    s3Key: thumbnailKey,
+                },
+                size: exifData.size
+            }
+            console.log("Updating photo document with new fields:\n", util.inspect(fields, {depth: 3}));
+            photos.update({_id: photoId}, {$set: fields}, next);
         }],
         function (err) {
             if (err) {
