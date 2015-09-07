@@ -1,7 +1,9 @@
 <template name="photoList">
     <div class="my-gallery thumbnail-list" itemscope itemtype="http://schema.org/ImageGallery">
     {{#each this}}
+        {{#if this.thumbnail}}
     {{> photoThumbnail}}
+        {{/if}}
     {{/each}}
     </div>
     {{>photoSwipeGallery}}
@@ -9,7 +11,7 @@
 
 <template name="photoThumbnail">
     <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-        <a href="{{original.url}}" itemprop="contentUrl" data-size="3344x2224">
+        <a href="{{original.url}}" itemprop="contentUrl" data-size="{{geometry}}">
             <img src="{{thumbnail.url}}" itemprop="thumbnail" alt="{{name}}" />
         </a>
         <figcaption itemprop="caption description">{{name}}</figcaption>

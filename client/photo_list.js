@@ -199,3 +199,15 @@ Template.photoList.onRendered(function(){
         openPhotoSwipe( hashData.pid ,  galleryElements[ hashData.gid - 1 ], true, true );
     }
 });
+
+Template.photoThumbnail.helpers({
+    geometry: function(){
+        if (!this.exif || !this.exif.size) {
+            return null;
+        };
+        var w = this.exif.size.width;
+        var h = this.exif.size.height;
+        return w + "x" + h;
+    }
+});
+

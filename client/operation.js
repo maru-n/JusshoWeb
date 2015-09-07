@@ -5,13 +5,10 @@ Template.operation.helpers({
     photos: function() {
         if (!this.photos) { return null; };
         var photos = Photos.find({
-            _id: {
-                $in: this.photos
-            }
+            _id: {$in: this.photos},
+            thumbnail: {$exists: true}
         },{
-            sort: {
-                name: 1
-            }
+            sort: {name: 1}
         });
         return photos;
     },
