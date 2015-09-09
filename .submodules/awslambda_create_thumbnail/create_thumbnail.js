@@ -92,7 +92,8 @@ exports.handler = function(event, context) {
                     url: thumbnailUrl,
                     s3Key: thumbnailKey,
                 },
-                size: exifData.size
+                size: exifData.size,
+                exif: exifData
             }
             console.log("Updating photo document with new fields:\n", util.inspect(fields, {depth: 3}));
             photos.update({_id: photoId}, {$set: fields}, next);
