@@ -6,7 +6,7 @@ Template.operation.helpers({
         if (!this.photos) { return null; };
         var photos = Photos.find({
             _id: {$in: this.photos},
-            thumbnail: {$exists: true}
+            available: true
         },{
             sort: {name: 1}
         });
@@ -46,7 +46,7 @@ var uploadFailedFiles = [];
 
 function uploadFiles(files, operationId) {
     _.each(files, function (file) {
-        Photos.insertFileBelongedOperation(file, operationId, function(error, objectId){
+        Photos.insertFileBelongedOperation(file, operationId, function(error, photoId){
             Session.set("uploaded_file_num", Session.get("uploaded_file_num")+1);
             if (error) {
                 console.error(error);

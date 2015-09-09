@@ -13,14 +13,16 @@
         <input type="submit" value="作戦を追加">
     </form>
     <ul>
-    {{#each operations}}
-    <li>
-        <a href="/operation/{{_id}}" class="operation"><strong>{{name}}</strong></a>
-        <ul>
-            <li>作成者：{{ownerName}}</li>
-            <li>写真：{{#if photos}}{{photos.length}}{{else}}0{{/if}}枚</li>
-        </ul>
-    </li>
-    {{/each}}
+        {{#each operations}}
+        <li>
+            <a href="/operation/{{_id}}" class="operation">
+                <strong>{{name}}</strong>
+            </a>
+            <ul>
+                <li>作成者：{{ownerName}}</li>
+                <li>写真：{{photoCount}}枚</li>
+            </ul>
+        </li>
+        {{/each}}
     </ul>
 </template>

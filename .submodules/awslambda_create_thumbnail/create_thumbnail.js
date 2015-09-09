@@ -4,6 +4,7 @@ var gm = require('gm').subClass({ imageMagick: true });
 var util = require('util');
 var mongodb = require('mongodb');
 
+var S3_URL_PREFIX = "https://s3-ap-northeast-1.amazonaws.com/";
 var WIDTH = 60;
 var THUMBNAIL_IMAGE_TYPE = 'jpg';
 
@@ -22,8 +23,8 @@ exports.handler = function(event, context) {
     var mongoUrl = MONGO_URL_MAP[bucket];
     var originalKey = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
     var thumbnailKey = originalKey.replace("originals/", "thumbnails/");
-    var originalUrl = "https://s3-ap-northeast-1.amazonaws.com/" + bucket + "/" + originalKey;
-    var thumbnailUrl = "https://s3-ap-northeast-1.amazonaws.com/" + bucket + "/" + thumbnailKey;
+    var originalUrl = S3_URL_PREFIX + bucket + "/" + event.Records[0].s3.object.key;
+    var thumbnailUrl = originalUrl.replace("originals/", "thumbnails/");
     var photoId = originalKey.split('-')[0].replace(/^[\w\/]*\//g, "");
 
     console.log("Starting convert of photo #" + photoId);
@@ -82,6 +83,7 @@ exports.handler = function(event, context) {
         function insertPhotoDocument(db, exifData, next) {
             var photos = db.collection("photos");
             var fields = {
+                available: true,
                 original: {
                     url: originalUrl,
                     s3Key: originalKey
@@ -98,11 +100,6 @@ exports.handler = function(event, context) {
         function (err) {
             if (err) {
                 console.error(err);
-                console.error(
-                    'Unable to resize ' + bucket + '/' + originalKey +
-                    ' and upload to ' + bucket + '/' + thumbnailKey +
-                    ' due to an error: ' + err
-                    );
             } else {
                 console.log(
                     'Successfully resized ' + bucket + '/' + originalKey +
