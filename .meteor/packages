@@ -12,11 +12,11 @@ classcraft:archiver
 iron:router
 meteorhacks:kadira
 kadira:debug
-meteorhacks:zones
 meteorhacks:kadira-profiler
 edgee:slingshot
 peerlibrary:aws-sdk
 peerlibrary:async
+spectrum:photoswipe
 yogiben:admin
 fortawesome:fontawesome
 aldeed:collection2

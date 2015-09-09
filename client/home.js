@@ -13,20 +13,32 @@ Template.home.helpers({
 
 Template.operationList.helpers({
     operations: function() {
-        return Operations.find({},{
+        return Operations.find({}, {
             sort: {
-              createdAt: -1
-          }
-      });
+                createdAt: -1
+            }
+        });
     },
     operationDefaultName: function() {
         return Operations.defaultName();
     },
+
     ownerName: function() {
         var owner = Meteor.users.findOne(this.owner);
         if (owner) {
             return owner.username;
         };
+    },
+
+    photoCount: function() {
+        if (!this.photos) {
+            return 0;
+        };
+        var photos = Photos.find({
+            _id: {$in: this.photos},
+            available: true
+        });
+        return photos.count();
     }
 });
 

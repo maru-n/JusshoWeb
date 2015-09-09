@@ -1,1 +1,8 @@
-/* CSS declarations go here */
+.thumbnail-list figure{
+    margin: 0;
+    float: left;
+}
+
+.thumbnail-list figcaption{
+    display: none;
+}

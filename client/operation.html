@@ -28,16 +28,7 @@
     </form>
     {{/if}}{{/if}}
 
-    {{#each photos}}
-    {{> photoThumbnail}}
-    {{/each}}
-
-</template>
-
-<template name="photoThumbnail">
-    {{#if thumbnail.url}}
-    <a href="{{original.url}}" target="_blank">
-        <img src="{{thumbnail.url}}" alt="" />
-    </a>
-    {{/if}}
+    {{#with photos}}
+    {{> photoList}}
+    {{/with}}
 </template>
