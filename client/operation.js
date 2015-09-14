@@ -1,5 +1,5 @@
 Meteor.subscribe("photos");
-var PHOTOS_INCREMENT = 20;
+var PHOTOS_INCREMENT = 5;
 Session.setDefault('photosLimit', PHOTOS_INCREMENT);
 
 Template.operation.helpers({
@@ -8,6 +8,7 @@ Template.operation.helpers({
         var photos = Photos.find({
             _id: {$in: this.photos},
         },{
+            limit: Session.get('photosLimit'),
             sort: {
                 photoDateTime: 1,
                 createdAt: 1,
@@ -97,4 +98,8 @@ Template.operation.events({
         Session.set("upload_failed_file_num", 0);
         upladFailedFiles = [];
     },
+
+    'click .show-more-photos' : function(event) {
+        Session.set("photosLimit", Session.get('photosLimit') + PHOTOS_INCREMENT);
+    }
 });
