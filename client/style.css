@@ -1,3 +1,13 @@
+body {
+    background-color: lightcyan;
+}
+
+.container {
+    margin: 0 auto;
+    background-color: white;
+    min-height: 400px;
+}
+
 .thumbnail-list figure{
     margin: 0;
     float: left;

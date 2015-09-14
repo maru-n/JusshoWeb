@@ -1,0 +1,10 @@
+<template name="layout">
+    <div class="container">
+        {{> loginButtons}}
+        {{#if isAdmin}}
+        <a href="/admin">管理ページ</a>
+        {{/if}}
+
+        {{> yield}}
+    </div>
+</template>

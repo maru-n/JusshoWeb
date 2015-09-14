@@ -1,14 +1,15 @@
 Meteor.subscribe("photos");
 
-
 Template.operation.helpers({
     photos: function() {
         if (!this.photos) { return null; };
         var photos = Photos.find({
             _id: {$in: this.photos},
-            available: true
         },{
-            sort: {name: 1}
+            sort: {
+                photoDateTime: 1,
+                createdAt: 1,
+            }
         });
         return photos;
     },
@@ -93,5 +94,5 @@ Template.operation.events({
     'click .delete-failed-files': function(event) {
         Session.set("upload_failed_file_num", 0);
         upladFailedFiles = [];
-    },
+    }
 });

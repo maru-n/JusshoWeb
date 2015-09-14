@@ -1,22 +1,10 @@
-Accounts.ui.config({
-    passwordSignupFields: "USERNAME_AND_EMAIL"
-});
-
 Meteor.subscribe("operations");
 Meteor.subscribe("allUserName");
-
-Template.home.helpers({
-    isAdmin: function() {
-        return Roles.userIsInRole(Meteor.userId(), 'admin');
-    }
-});
 
 Template.operationList.helpers({
     operations: function() {
         return Operations.find({}, {
-            sort: {
-                createdAt: -1
-            }
+            sort: {createdAt: -1}
         });
     },
     operationDefaultName: function() {
@@ -34,11 +22,7 @@ Template.operationList.helpers({
         if (!this.photos) {
             return 0;
         };
-        var photos = Photos.find({
-            _id: {$in: this.photos},
-            available: true
-        });
-        return photos.count();
+        return this.photos.length;
     }
 });
 
