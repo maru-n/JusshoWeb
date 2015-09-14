@@ -1,22 +1,10 @@
-Accounts.ui.config({
-    passwordSignupFields: "USERNAME_AND_EMAIL"
-});
-
 Meteor.subscribe("operations");
 Meteor.subscribe("allUserName");
-
-Template.home.helpers({
-    isAdmin: function() {
-        return Roles.userIsInRole(Meteor.userId(), 'admin');
-    }
-});
 
 Template.operationList.helpers({
     operations: function() {
         return Operations.find({}, {
-            sort: {
-                createdAt: -1
-            }
+            sort: {createdAt: -1}
         });
     },
     operationDefaultName: function() {
