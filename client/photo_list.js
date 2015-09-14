@@ -201,13 +201,16 @@ Template.photoList.onRendered(function(){
 });
 
 Template.photoThumbnail.helpers({
-    geometry: function(){
+    largeImageUrl: function(){
+        return this.medium.url;
+    },
+    largeImageGeometry: function(){
         if (!this.size) {
             console.error("No size data on photo #" + this._id);
-            return "100x100";
+            return "1000x1000";
         };
-        var w = this.size.width;
-        var h = this.size.height;
+        var w = this.medium.size.width;
+        var h = this.medium.size.height;
         return w + "x" + h;
     }
 });
