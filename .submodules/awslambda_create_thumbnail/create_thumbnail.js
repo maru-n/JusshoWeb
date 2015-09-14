@@ -27,7 +27,7 @@ exports.handler = function(event, context) {
     var thumbnailUrl = originalUrl.replace("originals/", "thumbnails/");
     var photoId = originalKey.split('-')[0].replace(/^[\w\/]*\//g, "");
 
-    console.log("Starting convert of photo #" + photoId);
+    console.log("Photo #" + photoId);
 
     if (originalKey === thumbnailKey) {
         console.error('upload key ' + originalKey + ' and destination key ' + thumbnailKey + ' are same.');
@@ -81,9 +81,17 @@ exports.handler = function(event, context) {
             });
         },
         function insertPhotoDocument(db, exifData, next) {
-            var photos = db.collection("photos");
+            console.log("Exif data:", exifData);
+            var photoDateTime;
+            try {
+                var dt = exifData.Properties['exif:DateTimeOriginal'].split(/[:\s]/);
+                photoDateTime = new Date(dt[0], dt[1]-1, dt[2], dt[3], dt[4], dt[5]);
+            } catch (e) {
+                photoDateTime; null;
+            }
             var fields = {
                 available: true,
+                photoDateTime: photoDateTime,
                 original: {
                     url: originalUrl,
                     s3Key: originalKey
@@ -94,7 +102,8 @@ exports.handler = function(event, context) {
                 },
                 size: exifData.size
             }
-            console.log("Updating photo document with new fields:\n", util.inspect(fields, {depth: 3}));
+            console.log("New Photo document fields:\n", util.inspect(fields, {depth: 3}));
+            var photos = db.collection("photos");
             photos.update({_id: photoId}, {$set: fields}, next);
         }],
         function (err) {

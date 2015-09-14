@@ -8,7 +8,10 @@ Template.operation.helpers({
             _id: {$in: this.photos},
             available: true
         },{
-            sort: {name: 1}
+            sort: {
+                photoDateTime: 1,
+                createdAt: 1,
+            }
         });
         return photos;
     },
