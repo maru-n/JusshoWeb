@@ -1,9 +1,7 @@
 <template name="photoList">
     <div class="my-gallery thumbnail-list" itemscope itemtype="http://schema.org/ImageGallery">
         {{#each this}}
-        {{#if this.thumbnail}}
         {{> photoThumbnail}}
-        {{/if}}
         {{/each}}
     </div>
     {{>photoSwipeGallery}}

@@ -203,11 +203,11 @@ Template.photoList.onRendered(function(){
 Template.photoThumbnail.helpers({
     geometry: function(){
         if (!this.size) {
-            return null;
+            console.error("No size data on photo #" + this._id);
+            return "100x100";
         };
         var w = this.size.width;
         var h = this.size.height;
         return w + "x" + h;
     }
 });
-

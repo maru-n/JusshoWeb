@@ -34,11 +34,7 @@ Template.operationList.helpers({
         if (!this.photos) {
             return 0;
         };
-        var photos = Photos.find({
-            _id: {$in: this.photos},
-            available: true
-        });
-        return photos.count();
+        return this.photos.length;
     }
 });
 
