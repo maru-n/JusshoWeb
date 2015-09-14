@@ -1,12 +1,12 @@
 Meteor.subscribe("photos");
-
+var PHOTOS_INCREMENT = 20;
+Session.setDefault('photosLimit', PHOTOS_INCREMENT);
 
 Template.operation.helpers({
     photos: function() {
         if (!this.photos) { return null; };
         var photos = Photos.find({
             _id: {$in: this.photos},
-            available: true
         },{
             sort: {
                 photoDateTime: 1,

@@ -5,7 +5,7 @@ var util = require('util');
 var mongodb = require('mongodb');
 
 var S3_URL_PREFIX = "https://s3-ap-northeast-1.amazonaws.com/";
-var WIDTH = 60;
+var HEIGHT = 60;
 var THUMBNAIL_IMAGE_TYPE = 'jpg';
 
 // map bucket -> mongo_url
@@ -43,7 +43,7 @@ exports.handler = function(event, context) {
             next);
         },
         function transform(s3GetResponse, next) {
-            gm(s3GetResponse.Body).autoOrient().resize(null, WIDTH).toBuffer(THUMBNAIL_IMAGE_TYPE, function(err, buffer) {
+            gm(s3GetResponse.Body).autoOrient().resize(null, HEIGHT).toBuffer(THUMBNAIL_IMAGE_TYPE, function(err, buffer) {
                 if (err) {
                     next(err);
                 } else {
@@ -87,20 +87,33 @@ exports.handler = function(event, context) {
                 var dt = exifData.Properties['exif:DateTimeOriginal'].split(/[:\s]/);
                 photoDateTime = new Date(dt[0], dt[1]-1, dt[2], dt[3], dt[4], dt[5]);
             } catch (e) {
-                photoDateTime; null;
+                photoDateTime = null;
+            }
+            var size, thumbnailSize;
+            try {
+                size = exifData.size;
+                thumbnailSize = {
+                    width: Math.floor(size.width * HEIGHT / size.height),
+                    height: HEIGHT
+                }
+            } catch (e) {
+                size = null;
+                thumbnailSize = null;
             }
             var fields = {
                 available: true,
+                size: size,
                 photoDateTime: photoDateTime,
                 original: {
                     url: originalUrl,
-                    s3Key: originalKey
+                    s3Key: originalKey,
+                    size: size
                 },
                 thumbnail: {
                     url: thumbnailUrl,
                     s3Key: thumbnailKey,
-                },
-                size: exifData.size
+                    size: thumbnailSize
+                }
             }
             console.log("New Photo document fields:\n", util.inspect(fields, {depth: 3}));
             var photos = db.collection("photos");

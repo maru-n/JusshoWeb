@@ -5,6 +5,7 @@ body {
 .container {
     margin: 0 auto;
     background-color: white;
+    min-height: 400px;
 }
 
 .thumbnail-list figure{
