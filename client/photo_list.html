@@ -9,7 +9,7 @@
 
 <template name="photoThumbnail">
     <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-        <a href="{{original.url}}" itemprop="contentUrl" data-size="{{geometry}}">
+        <a href="{{largeImageUrl}}" itemprop="contentUrl" data-size="{{largeImageGeometry}}">
             <img src="{{thumbnail.url}}" itemprop="thumbnail" alt="{{name}}"
             width="{{thumbnail.size.width}}px"
             height="{{thumbnail.size.height}}px" />
