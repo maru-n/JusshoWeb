@@ -62,6 +62,19 @@ function uploadFiles(files, operationId) {
 
 
 Template.operation.events({
+    'click .upload-files': function(event) {
+        if (BrowserDetect.OS !== "iPhone/iPod") {
+            return
+        }
+        var result = confirm(
+            "iPhone/iPadからのアップロードは撮影時刻・位置情報等が削除されます。\n" +
+            "写真の場合はPCからアップしてね。");
+        if(result){
+        }else{
+            event.preventDefault();
+        }
+    },
+
     'change .upload-files': function(event) {
         var files = event.target.files;
         Session.set("uploading_operation", this._id);
