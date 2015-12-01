@@ -102,17 +102,26 @@ exports.handler = function(event, context) {
             });
         },
         function insertPhotoDocument(db, exifData, next) {
-            console.log("Exif data:", exifData);
-            var photoDateTime;
+            var photoDateTime = null;
             try {
                 var dt = exifData.Properties['exif:DateTimeOriginal'].split(/[:\s]/);
                 photoDateTime = new Date(dt[0], dt[1]-1, dt[2], dt[3], dt[4], dt[5]);
-            } catch (e) {
-                photoDateTime = null;
+            } catch (error) {
+                console.error(error)
             }
-            var size, thumbnailSize, mediumSize;
+
+            var size = null, thumbnailSize = null, mediumSize = null;
             try {
                 size = exifData.size;
+                if (exifData.Properties['exif:Orientation'] >= 5) {
+                    size.height = [size.width, size.width=size.height][0];
+                    thumbnailSize.height = [thumbnailSize.width, thumbnailSize.width=thumbnailSize.height][0];
+                    mediumSize.height = [mediumSize.width, mediumSize.width=mediumSize.height][0];
+                }
+            } catch (error) {
+                console.error(error);
+            }
+            if (size != null) {
                 thumbnailSize = {
                     width: Math.floor(size.width * THUMBNAIL_HEIGHT / size.height),
                     height: THUMBNAIL_HEIGHT
@@ -121,15 +130,13 @@ exports.handler = function(event, context) {
                     width: Math.floor(size.width > size.height ? MEDIUM_MAX_SIZE : size.width * MEDIUM_MAX_SIZE / size.height),
                     height: Math.floor(size.width > size.height ? size.height * MEDIUM_MAX_SIZE / size.width : MEDIUM_MAX_SIZE)
                 }
-            } catch (error) {
-                console.error(error);
-                size = null;
-                thumbnailSize = null;
             }
+
             var fields = {
                 available: true,
                 size: size,
                 photoDateTime: photoDateTime,
+                meta: exifData,
                 original: {
                     url: originalUrl,
                     s3Key: originalKey,

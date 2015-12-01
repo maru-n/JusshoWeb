@@ -7,3 +7,4 @@ Dockerrun.aws.json
 .ebextensions/02_app.config
 .submodules/awslambda_create_thumbnail/node_modules
 deploy_awslambda.sh
+meteor_run
