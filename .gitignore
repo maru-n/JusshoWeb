@@ -8,3 +8,4 @@ Dockerrun.aws.json
 .submodules/awslambda_create_thumbnail/node_modules
 deploy_awslambda.sh
 meteor_run
+.submodules
