@@ -1,10 +1,12 @@
-Meteor.subscribe("photos");
+Template.operation.onCreated(function(){
+    Meteor.subscribe("operationPhotos", this.data);
+});
 
 Template.operation.helpers({
     photos: function() {
-        if (!this.photos) { return null; };
         var photos = Photos.find({
-            _id: {$in: this.photos},
+            operation: this._id,
+            available: true,
         },{
             sort: {
                 photoDateTime: 1,
