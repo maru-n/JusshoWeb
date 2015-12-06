@@ -205,7 +205,7 @@ Template.photoThumbnail.helpers({
         return this.medium.url;
     },
     largeImageGeometry: function(){
-        if (!this.size) {
+        if (!this.medium.size) {
             console.error("No size data on photo #" + this._id);
             return "1000x1000";
         };
