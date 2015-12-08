@@ -42,6 +42,11 @@ Template.operation.helpers({
     uploadFailedNum: function() {
         return Session.get("upload_failed_file_num");
     },
+
+    coverPhotoUrl: function() {
+        var coverPhoto = Photos.findOne({operation:this._id});
+        return coverPhoto.medium.url
+    }
 });
 
 
