@@ -1,24 +1,55 @@
 <template name="home">
-    {{> operationList}}
+    <main class="mdl-layout__content">
+        <div class="demo-blog__posts mdl-grid">
+            {{> operationNavigation}}
+            {{> operationList}}
+        </div>
+    </main>
 </template>
 
+
+<template name="operationNavigation">
+    <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+        <form class="new-operation">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                <input class="mdl-textfield__input" type="text" id="operation-name" />
+                <label class="mdl-textfield__label" for="operation-name">作戦名</label>
+            </div>
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                追加
+            </button>
+        </form>
+    </div>
+</template>
+
+
 <template name="operationList">
-    <h1>作戦一覧</h1>
-    <form class="new-operation">
-        <input type="text" name="text" placeholder="{{operationDefaultName}}" />
-        <input type="submit" value="作戦を追加">
-    </form>
-    <ul>
-        {{#each operations}}
-        <li>
-            <a href="/operation/{{_id}}" class="operation">
-                <strong>{{name}}</strong>
-            </a>
-            <ul>
-                <li>作成者：{{ownerName}}</li>
-                <li>写真：{{photoCount}}枚</li>
-            </ul>
-        </li>
-        {{/each}}
-    </ul>
+    {{#each operations}}
+    <div class="mdl-card mdl-cell mdl-cell--4-col">
+        <div class="mdl-card__media mdl-color-text--grey-50" style="background-image: url('{{coverPhotoUrl}}');">
+            <h3>{{name}}</h3>
+        </div>
+        <div class="mdl-card__supporting-text meta mdl-color-text--grey-600">
+            <i class="material-icons">info</i>
+            <div>
+                <span>{{ownerName}}が作成</span>
+                <span>{{photoCount}}枚の写真</span>
+            </div>
+        </div>
+        <div class="mdl-card__actions">
+            <a href="/operation/{{_id}}">詳細</a>
+        </div>
+    </div>
+    {{/each}}
+
+    <nav class="demo-nav mdl-cell mdl-cell--12-col">
+        <div class="section-spacer"></div>
+        <a href="entry.html" class="demo-nav__button" title="show more">
+            More
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+                <i class="material-icons" role="presentation">arrow_forward</i>
+            </button>
+        </a>
+    </nav>
+
 </template>
