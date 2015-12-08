@@ -38,20 +38,6 @@ body .demo-blog {
   font-family: 'Roboto', 'Helvetica', sans-serif;
 }
 
-.demo-blog .demo-blog__posts {
-  max-width: 900px;
-  padding: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  margin: 0 auto;
-  -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
-}
-
 .demo-blog.mdl-layout .mdl-layout__content {
   padding-top: 230px;
   position: relative;
@@ -507,16 +493,6 @@ body .demo-blog {
 }
 .demo-blog .amazing .mdl-card__title {
   background-color: #263238;
-}
-.demo-blog .minilogo {
-  width: 44px;
-  height: 44px;
-  background-image: url('images/avatar.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 50%;
-  border-radius: 22px;
-  background-color: #F5F5F5;
 }
 
 /* Fixes for IE 10 */
