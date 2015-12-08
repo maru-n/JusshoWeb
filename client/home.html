@@ -2,13 +2,13 @@
     <main class="mdl-layout__content">
         <div class="demo-blog__posts mdl-grid">
             {{> operationNavigation}}
-            {{> operationList}}
+            {{> newOperation}}
         </div>
     </main>
 </template>
 
 
-<template name="operationNavigation">
+<template name="newOperation">
     <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
         <form class="new-operation">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
@@ -27,7 +27,7 @@
     {{#each operations}}
     <div class="mdl-card mdl-cell mdl-cell--4-col">
         <div class="mdl-card__media mdl-color-text--grey-50" style="background-image: url('{{coverPhotoUrl}}');">
-            <h3>{{name}}</h3>
+            <h3 class="over-photo-text">{{name}}</h3>
         </div>
         <div class="mdl-card__supporting-text meta mdl-color-text--grey-600">
             <i class="material-icons">info</i>
