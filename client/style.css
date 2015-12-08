@@ -1,18 +1,56 @@
-body {
-    background-color: lightcyan;
+body::before {
+    background-color: #cccccc;
 }
 
-.container {
-    margin: 0 auto;
-    background-color: white;
-    min-height: 400px;
+.demo-blog .demo-blog__posts {
+    max-width: inherit;
+}
+
+.mdl-card__media {
+    background-color: #263238;
+}
+
+.demo-blog.mdl-layout .mdl-layout__content {
+    padding-top: 40px;
+}
+
+.demo-blog .demo-blog__posts {
+    max-width: 980px;
 }
 
 .thumbnail-list figure{
-    margin: 0;
+    margin: 1px;
     float: left;
 }
 
 .thumbnail-list figcaption{
     display: none;
 }
+
+.mdl-card .mdl-card__actions {
+    padding: 0;
+}
+
+.mdl-card .mdl-card__actions a {
+    text-indent: -9999999px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.mdl-cell {
+    //background: #ffffff;
+}
+
+.mdl-card__media h3 {
+    text-shadow: 0px 0px 10px #000;
+}
+/*
+.new-operation button {
+    height: 27px;
+    line-height: inherit;
+}
+*/
