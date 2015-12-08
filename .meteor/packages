@@ -16,11 +16,8 @@ edgee:slingshot
 peerlibrary:aws-sdk
 peerlibrary:async
 spectrum:photoswipe
-yogiben:admin
-fortawesome:fontawesome
 aldeed:collection2
 dburles:collection-helpers
-twbs:bootstrap
 awatson1978:browser-detection
 standard-minifiers
 meteor-base
