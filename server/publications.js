@@ -20,6 +20,20 @@ Meteor.publish('operationPhotos', function(operation){
     return photos;
 });
 
+Meteor.publish("coverPhotos", function(){
+    var operations = Operations.find();
+    var photoIds = []
+    operations.forEach(function(o){
+        try {
+            var p = Photos.findOne({operation:o._id});
+            photoIds.push(p._id);
+        } catch (e) {
+        }
+    });
+    return Photos.find({_id: {$in: photoIds}})
+});
+
+
 Meteor.publish("photos", function () {
     return Photos.find({
         available: true
