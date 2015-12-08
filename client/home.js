@@ -3,9 +3,10 @@ Meteor.subscribe("allUserName");
 
 Template.operationList.helpers({
     operations: function() {
-        return Operations.find({}, {
+        var operations = Operations.find({}, {
             sort: {createdAt: -1}
         });
+        return operations
     },
     operationDefaultName: function() {
         return Operations.defaultName();
