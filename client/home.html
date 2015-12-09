@@ -1,22 +1,7 @@
 <template name="home">
     <main class="mdl-layout__content">
         <div class="demo-blog__posts mdl-grid">
-
-            <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-                <form class="new-operation">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-                        <input class="mdl-textfield__input" type="text" id="operation-name" />
-                        <label class="mdl-textfield__label" for="operation-name">作戦名</label>
-                        <input type="submit" value="作戦を追加">
-                    </div>
-                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                        追加
-                    </button>
-                </form>
-            </div>
-
             {{> operationList}}
-
         </div>
     </main>
 </template>

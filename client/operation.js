@@ -44,8 +44,12 @@ Template.operation.helpers({
     },
 
     coverPhotoUrl: function() {
-        var coverPhoto = Photos.findOne({operation:this._id});
-        return coverPhoto.medium.url
+        try {
+            var coverPhoto = Photos.findOne({operation:this._id});
+            return coverPhoto.medium.url
+        } catch (e) {
+            return ""
+        }
     }
 });
 
