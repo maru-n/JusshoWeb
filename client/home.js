@@ -1,6 +1,5 @@
 Meteor.subscribe("operations");
-Meteor.subscribe("allUserName");
-Meteor.subscribe("coverPhotos");
+
 
 Template.home.helpers({
     operations: function() {
@@ -11,5 +10,16 @@ Template.home.helpers({
     },
 });
 
+
 Template.home.events({
+});
+
+
+Template.newOperation.events({
+    'submit .new-operation': function(event) {
+        event.preventDefault();
+        var text = event.target.text.value;
+        Meteor.call("createOperation", text);
+        event.target.text.value = "";
+    },
 });

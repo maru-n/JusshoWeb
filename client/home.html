@@ -1,7 +1,25 @@
 <template name="home">
     <main class="mdl-layout__content">
         <div class="demo-blog__posts mdl-grid">
-            {{> operationList}}
+            {{> newOperation}}
+            {{#with operations}}
+                {{> operationList}}
+            {{/with}}
         </div>
     </main>
+</template>
+
+
+<template name="newOperation">
+    <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+        <form class="new-operation">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                <input class="mdl-textfield__input" type="text" name="text" id="new-operation-name" />
+                <label class="mdl-textfield__label" for="new-operation-name">作戦名</label>
+            </div>
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                追加
+            </button>
+        </form>
+    </div>
 </template>

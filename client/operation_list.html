@@ -1,18 +1,5 @@
 <template name="operationList">
-
-    <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-        <form class="new-operation">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-                <input class="mdl-textfield__input" type="text" name="text" id="new-operation-name" />
-                <label class="mdl-textfield__label" for="new-operation-name">作戦名</label>
-            </div>
-            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                追加
-            </button>
-        </form>
-    </div>
-
-    {{#each operations}}
+    {{#each this}}
     <div class="mdl-card mdl-cell mdl-cell--4-col">
         <div class="mdl-card__media mdl-color-text--grey-50" style="background-image: url('{{coverPhotoUrl}}');">
             <h3 class="over-photo-text">{{name}}</h3>
@@ -30,6 +17,7 @@
     </div>
     {{/each}}
 
+    {{!
     <nav class="demo-nav mdl-cell mdl-cell--12-col">
         <div class="section-spacer"></div>
         <a href="entry.html" class="demo-nav__button" title="show more">
@@ -39,5 +27,5 @@
             </button>
         </a>
     </nav>
-
+    }}
 </template>

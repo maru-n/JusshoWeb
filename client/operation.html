@@ -8,31 +8,33 @@
 
                 <div>
                     {{#if isEditPermitted}}
-                    <a href="/" class='delete'>この作戦を削除</a>
-                    <a href="" class='delete-all-photos'>全ての写真を削除</a>
+                        <a href="/" class='delete'>この作戦を削除</a>
+                        <a href="" class='delete-all-photos'>全ての写真を削除</a>
                     {{/if}}
 
                     {{#if isUploading}}
-                    <p>
-                        <strong>{{uploadOperation}}にアップロード中（{{uploadedFileNum}}/{{uploadingFileNum}}）</strong>
-                    </p>
-                    {{else}}{{#if uploadFailedNum}}
-                    <p>
-                        <span style="color:red;">{{uploadOperation}}への{{uploadFailedNum}}枚のアップロードに失敗しました。</span>
-                        <a href="" class='retry-upload-files'>{{uploadFailedNum}}枚を再アップロード</a> <a href="" class='delete-failed-files'>閉じる</a>
-                    </p>
-                    {{else}}
-                    <form>
                         <p>
-                            <label for="upload-files">写真をアップロード</label>
-                            <input type="file" name="upload-files" class="upload-files" multiple>
+                            <strong>{{uploadOperation}}にアップロード中（{{uploadedFileNum}}/{{uploadingFileNum}}）</strong>
                         </p>
-                    </form>
-                    {{/if}}{{/if}}
+                    {{else}}
+                        {{#if uploadFailedNum}}
+                            <p>
+                                <span style="color:red;">{{uploadOperation}}への{{uploadFailedNum}}枚のアップロードに失敗しました。</span>
+                                <a href="" class='retry-upload-files'>{{uploadFailedNum}}枚を再アップロード</a> <a href="" class='delete-failed-files'>閉じる</a>
+                            </p>
+                        {{else}}
+                            <form>
+                                <p>
+                                    <label for="upload-files">写真をアップロード</label>
+                                    <input type="file" name="upload-files" class="upload-files" multiple>
+                                </p>
+                            </form>
+                        {{/if}}
+                    {{/if}}
                 </div>
 
                 {{#with photos}}
-                {{> photoList}}
+                    {{> photoList}}
                 {{/with}}
 
             </div>
