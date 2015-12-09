@@ -1,10 +1,19 @@
 <template name="layout">
-    <div class="container">
-        {{> loginButtons}}
-        {{#if isAdmin}}
-        <a href="/admin">管理ページ</a>
-        {{/if}}
+    <div class="demo-blog demo-blog--blogpost mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        {{> navigation}}
+        <main class="mdl-layout__content">
+            {{> yield}}
+        </main>
+        {{> yield "aside"}}
+    </div>
+</template>
 
-        {{> yield}}
+
+<template name="notLoggedInLayout">
+    <div class="demo-blog demo-blog--blogpost mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        {{> noMenuNavigation}}
+        <main class="mdl-layout__content">
+            {{> yield}}
+        </main>
     </div>
 </template>

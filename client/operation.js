@@ -1,5 +1,5 @@
 Template.operation.onCreated(function(){
-    Meteor.subscribe("operationPhotos", this.data);
+    this.subscribe("operationPhotos", this.data);
 });
 
 Template.operation.helpers({
@@ -42,6 +42,15 @@ Template.operation.helpers({
     uploadFailedNum: function() {
         return Session.get("upload_failed_file_num");
     },
+
+    coverPhotoUrl: function() {
+        try {
+            var coverPhoto = Photos.findOne({operation:this._id});
+            return coverPhoto.medium.url
+        } catch (e) {
+            return ""
+        }
+    }
 });
 
 

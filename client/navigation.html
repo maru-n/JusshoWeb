@@ -1,0 +1,29 @@
+<template name="navigation">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <span class="mdl-layout-title">縣陵十将会</span>
+            <div class="mdl-layout-spacer"></div>
+            <nav class="mdl-navigation mdl-layout--large-screen-only">{{>navigationMenu}}</nav>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer mdl-layout--small-screen-only">
+        <nav class="mdl-navigation">{{>navigationMenu}}</nav>
+    </div>
+</template>
+
+
+<template name="navigationMenu">
+    <a class="mdl-navigation__link log-out-button" href="">ログアウト</a>
+    {{#if isAdmin}}
+        <a class="mdl-navigation__link" href="/admin">管理ページ</a>
+    {{/if}}
+</template>
+
+
+<template name="noMenuNavigation">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <span class="mdl-layout-title">縣陵十将会</span>
+        </div>
+    </header>
+</template>

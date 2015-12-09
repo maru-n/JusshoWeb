@@ -1,32 +1,54 @@
 <template name="operation">
-    <h1>{{name}}</h1>
+    <div class="demo-blog__posts mdl-grid">
+        <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__media mdl-color-text--grey-50" style="background-image: url('{{coverPhotoUrl}}');">
+                <h3 class="over-photo-text">{{name}}</h3>
+            </div>
 
-    <a href="/">戻る</a>
-    {{#if isEditPermitted}}
-    <a href="/" class='delete'>この作戦を削除</a>
-    <a href="" class='delete-all-photos'>全ての写真を削除</a>
-    {{/if}}
+            <div>
+                {{#if isEditPermitted}}
+                    <a href="/" class='delete'>この作戦を削除</a>
+                    <a href="" class='delete-all-photos'>全ての写真を削除</a>
+                {{/if}}
+
+                {{#if isUploading}}
+                    <p>
+                        <strong>{{uploadOperation}}にアップロード中（{{uploadedFileNum}}/{{uploadingFileNum}}）</strong>
+                    </p>
+                {{else}}
+                    {{#if uploadFailedNum}}
+                        <p>
+                            <span style="color:red;">{{uploadOperation}}への{{uploadFailedNum}}枚のアップロードに失敗しました。</span>
+                            <a href="" class='retry-upload-files'>{{uploadFailedNum}}枚を再アップロード</a> <a href="" class='delete-failed-files'>閉じる</a>
+                        </p>
+                    {{else}}
+                        <form>
+                            <p>
+                                <label for="upload-files">写真をアップロード</label>
+                                <input type="file" name="upload-files" class="upload-files" multiple>
+                            </p>
+                        </form>
+                    {{/if}}
+                {{/if}}
+            </div>
+
+            {{#with photos}}
+                {{> photoList}}
+            {{/with}}
+
+        </div>
+    </div>
+</template>
 
 
-    {{#if isUploading}}
-    <p>
-        <strong>{{uploadOperation}}にアップロード中（{{uploadedFileNum}}/{{uploadingFileNum}}）</strong>
-    </p>
-    {{else}}{{#if uploadFailedNum}}
-    <p>
-        <span style="color:red;">{{uploadOperation}}への{{uploadFailedNum}}枚のアップロードに失敗しました。</span>
-        <a href="" class='retry-upload-files'>{{uploadFailedNum}}枚を再アップロード</a> <a href="" class='delete-failed-files'>閉じる</a>
-    </p>
-    {{else}}
-    <form>
-        <p>
-            <label for="upload-files">写真をアップロード</label>
-            <input type="file" name="upload-files" class="upload-files" multiple>
-        </p>
-    </form>
-    {{/if}}{{/if}}
+<template name="operationAside">
+    {{>photoSwipeGallery}}
+    {{>backButton}}
+</template>
 
-    {{#with photos}}
-    {{> photoList}}
-    {{/with}}
+
+<template name="backButton">
+    <a href="/" id="back-button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary">
+        <i class="material-icons">reply</i>
+    </a>
 </template>
