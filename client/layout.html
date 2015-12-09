@@ -1,8 +1,19 @@
 <template name="layout">
     <div class="demo-blog demo-blog--blogpost mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        {{#if currentUser}}
-            {{> navigation}}
-        {{/if}}
-        {{> yield}}
+        {{> navigation}}
+        <main class="mdl-layout__content">
+            {{> yield}}
+        </main>
+        {{> yield "aside"}}
+    </div>
+</template>
+
+
+<template name="notLoggedInLayout">
+    <div class="demo-blog demo-blog--blogpost mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        {{> noMenuNavigation}}
+        <main class="mdl-layout__content">
+            {{> yield}}
+        </main>
     </div>
 </template>

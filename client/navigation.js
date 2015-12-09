@@ -3,3 +3,9 @@ Template.navigationMenu.helpers({
         return Roles.userIsInRole(Meteor.userId(), 'admin');
     }
 });
+
+Template.navigationMenu.events({
+    'click .log-out-button': function(event) {
+        Meteor.logout();
+    },
+});

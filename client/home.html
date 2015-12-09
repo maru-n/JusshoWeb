@@ -1,12 +1,10 @@
 <template name="home">
-    <main class="mdl-layout__content">
-        <div class="demo-blog__posts mdl-grid">
-            {{> newOperation}}
-            {{#with operations}}
-                {{> operationList}}
-            {{/with}}
-        </div>
-    </main>
+    <div class="demo-blog__posts mdl-grid">
+        {{> newOperation}}
+        {{#with operations}}
+            {{> operationList}}
+        {{/with}}
+    </div>
 </template>
 
 

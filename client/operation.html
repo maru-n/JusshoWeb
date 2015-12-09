@@ -1,45 +1,47 @@
 <template name="operation">
-    <main class="mdl-layout__content">
-        <div class="demo-blog__posts mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-                <div class="mdl-card__media mdl-color-text--grey-50" style="background-image: url('{{coverPhotoUrl}}');">
-                    <h3 class="over-photo-text">{{name}}</h3>
-                </div>
+    <div class="demo-blog__posts mdl-grid">
+        <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__media mdl-color-text--grey-50" style="background-image: url('{{coverPhotoUrl}}');">
+                <h3 class="over-photo-text">{{name}}</h3>
+            </div>
 
-                <div>
-                    {{#if isEditPermitted}}
-                        <a href="/" class='delete'>この作戦を削除</a>
-                        <a href="" class='delete-all-photos'>全ての写真を削除</a>
-                    {{/if}}
+            <div>
+                {{#if isEditPermitted}}
+                    <a href="/" class='delete'>この作戦を削除</a>
+                    <a href="" class='delete-all-photos'>全ての写真を削除</a>
+                {{/if}}
 
-                    {{#if isUploading}}
+                {{#if isUploading}}
+                    <p>
+                        <strong>{{uploadOperation}}にアップロード中（{{uploadedFileNum}}/{{uploadingFileNum}}）</strong>
+                    </p>
+                {{else}}
+                    {{#if uploadFailedNum}}
                         <p>
-                            <strong>{{uploadOperation}}にアップロード中（{{uploadedFileNum}}/{{uploadingFileNum}}）</strong>
+                            <span style="color:red;">{{uploadOperation}}への{{uploadFailedNum}}枚のアップロードに失敗しました。</span>
+                            <a href="" class='retry-upload-files'>{{uploadFailedNum}}枚を再アップロード</a> <a href="" class='delete-failed-files'>閉じる</a>
                         </p>
                     {{else}}
-                        {{#if uploadFailedNum}}
+                        <form>
                             <p>
-                                <span style="color:red;">{{uploadOperation}}への{{uploadFailedNum}}枚のアップロードに失敗しました。</span>
-                                <a href="" class='retry-upload-files'>{{uploadFailedNum}}枚を再アップロード</a> <a href="" class='delete-failed-files'>閉じる</a>
+                                <label for="upload-files">写真をアップロード</label>
+                                <input type="file" name="upload-files" class="upload-files" multiple>
                             </p>
-                        {{else}}
-                            <form>
-                                <p>
-                                    <label for="upload-files">写真をアップロード</label>
-                                    <input type="file" name="upload-files" class="upload-files" multiple>
-                                </p>
-                            </form>
-                        {{/if}}
+                        </form>
                     {{/if}}
-                </div>
-
-                {{#with photos}}
-                    {{> photoList}}
-                {{/with}}
-
+                {{/if}}
             </div>
+
+            {{#with photos}}
+                {{> photoList}}
+            {{/with}}
+
         </div>
-    </main>
+    </div>
+</template>
+
+
+<template name="operationAside">
     {{>photoSwipeGallery}}
     {{>backButton}}
 </template>
