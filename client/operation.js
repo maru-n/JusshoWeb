@@ -1,5 +1,5 @@
 Template.operation.onCreated(function(){
-    Meteor.subscribe("operationPhotos", this.data);
+    this.subscribe("operationPhotos", this.data);
 });
 
 Template.operation.helpers({

@@ -1,31 +1,21 @@
 <template name="navigation">
-
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
             <span class="mdl-layout-title">縣陵十将会</span>
-            <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="">パスワードの変更</a>
-                <a class="mdl-navigation__link" href="">ログアウト</a>
-                {{> loginButtons}}
-                {{#if isAdmin}}
-                <a href="/admin">管理ページ</a>
-                {{/if}}
-            </nav>
+            <nav class="mdl-navigation mdl-layout--large-screen-only">{{>navigationMenu}}</nav>
         </div>
     </header>
-
     <div class="mdl-layout__drawer mdl-layout--small-screen-only">
-        <span class="mdl-layout-title">縣陵十将会</span>
-        <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="">パスワードの変更</a>
-            <a class="mdl-navigation__link" href="">ログアウト</a>
-            {{> loginButtons}}
-            {{#if isAdmin}}
-            <a href="/admin">管理ページ</a>
-            {{/if}}
-        </nav>
+        <nav class="mdl-navigation">{{>navigationMenu}}</nav>
     </div>
+</template>
 
+
+<template name="navigationMenu">
+    <a class="mdl-navigation__link" href="">ログアウト</a>
+    {{> loginButtons}}
+    {{#if isAdmin}}
+        <a class="mdl-navigation__link" href="/admin">管理ページ</a>
+    {{/if}}
 </template>

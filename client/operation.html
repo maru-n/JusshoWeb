@@ -40,8 +40,13 @@
             </div>
         </div>
     </main>
-    <a href="/" id="back-button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+    {{>photoSwipeGallery}}
+    {{>backButton}}
+</template>
+
+
+<template name="backButton">
+    <a href="/" id="back-button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary">
         <i class="material-icons">reply</i>
     </a>
-    {{>photoSwipeGallery}}
 </template>
