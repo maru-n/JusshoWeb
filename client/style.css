@@ -10,11 +10,6 @@ body::before {
     background-color: #263238;
 }
 
-.demo-blog.mdl-layout .mdl-layout__content {
-    padding-top: 40px;
-    padding-bottom: 90px;
-}
-
 .demo-blog .demo-blog__posts {
     max-width: 980px;
 }
