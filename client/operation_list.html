@@ -1,0 +1,31 @@
+<template name="operationList">
+
+    {{#each operations}}
+    <div class="mdl-card mdl-cell mdl-cell--4-col">
+        <div class="mdl-card__media mdl-color-text--grey-50" style="background-image: url('{{coverPhotoUrl}}');">
+            <h3 class="over-photo-text">{{name}}</h3>
+        </div>
+        <div class="mdl-card__supporting-text meta mdl-color-text--grey-600">
+            <i class="material-icons">info</i>
+            <div>
+                <span>{{ownerName}}が作成</span>
+                <span>{{photoCount}}枚の写真</span>
+            </div>
+        </div>
+        <div class="mdl-card__actions">
+            <a href="/operation/{{_id}}">詳細</a>
+        </div>
+    </div>
+    {{/each}}
+
+    <nav class="demo-nav mdl-cell mdl-cell--12-col">
+        <div class="section-spacer"></div>
+        <a href="entry.html" class="demo-nav__button" title="show more">
+            More
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+                <i class="material-icons" role="presentation">arrow_forward</i>
+            </button>
+        </a>
+    </nav>
+
+</template>

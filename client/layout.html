@@ -1,6 +1,8 @@
 <template name="layout">
     <div class="demo-blog demo-blog--blogpost mdl-layout mdl-js-layout">
-        {{> navigation}}
+        {{#if currentUser}}
+            {{> navigation}}
+        {{/if}}
         {{> yield}}
     </div>
 </template>
