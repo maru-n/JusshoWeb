@@ -11,9 +11,6 @@ body::before {
 .demo-blog .demo-blog__posts {
     max-width: 980px;
 }
-.demo-blog .demo-blog__posts {
-    max-width: inherit;
-}
 
 .mdl-card__media {
     background-color: #263238;

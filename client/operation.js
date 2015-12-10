@@ -97,7 +97,7 @@ Template.operation.events({
         event.target.value = null;
     },
 
-    'click .delete': function(event) {
+    'click .delete-operation': function(event) {
         Meteor.call("deleteOperation", this._id);
     },
 
