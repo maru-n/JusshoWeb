@@ -5,12 +5,22 @@
                 <h3 class="over-photo-text">{{name}}</h3>
             </div>
 
-            <div>
+            <div class="mdl-card__menu" id="operation-setting-menu">
+                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                    <i class="material-icons">settings</i>
+                </button>
+            </div>
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="operation-setting-menu">
                 {{#if isEditPermitted}}
-                    <a href="/" class='delete'>この作戦を削除</a>
-                    <a href="" class='delete-all-photos'>全ての写真を削除</a>
+                <li class="mdl-menu__item delete-operation">この作戦を削除</li>
+                <li class="mdl-menu__item delete-all-photos">全ての写真を削除</li>
+                {{else}}
+                <li disabled class="mdl-menu__item delete-operation">この作戦を削除</li>
+                <li disabled class="mdl-menu__item delete-all-photos">全ての写真を削除</li>
                 {{/if}}
+            </ul>
 
+            <div>
                 {{#if isUploading}}
                     <p>
                         <strong>{{uploadOperation}}にアップロード中（{{uploadedFileNum}}/{{uploadingFileNum}}）</strong>
