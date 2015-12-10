@@ -2,6 +2,15 @@ body::before {
     background-color: #cccccc;
 }
 
+.jw-background-photo {
+    background-image: url('https://s3-ap-northeast-1.amazonaws.com/jusshoweb/mediums/H7LZKQYHaY6h4yrLm/QdL3kkA2jagLyvZpR-DSC05984.JPG');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.demo-blog .demo-blog__posts {
+    max-width: 980px;
+}
 .demo-blog .demo-blog__posts {
     max-width: inherit;
 }
@@ -9,24 +18,9 @@ body::before {
 .mdl-card__media {
     background-color: #263238;
 }
-
-.demo-blog .demo-blog__posts {
-    max-width: 980px;
-}
-
-.thumbnail-list figure{
-    margin: 1px;
-    float: left;
-}
-
-.thumbnail-list figcaption{
-    display: none;
-}
-
 .mdl-card .mdl-card__actions {
     padding: 0;
 }
-
 .mdl-card .mdl-card__actions a {
     text-indent: -9999999px;
     display: block;
@@ -36,7 +30,6 @@ body::before {
     top: 0;
     left: 0;
 }
-
 .mdl-card__media .over-photo-text {
     text-shadow: 0px 0px 10px #000;
 }
@@ -46,6 +39,10 @@ body::before {
     line-height: inherit;
 }
 
+.thumbnail-list figure{
+    margin: 1px;
+    float: left;
+}
 .thumbnail-list {
     padding: 1px;
 }
