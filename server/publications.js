@@ -9,15 +9,7 @@ Meteor.publish("operations", function () {
 });
 
 Meteor.publish('operationPhotos', function(operation){
-    var photos = Photos.find({
-        operation: operation._id,
-        available: true
-    },{
-        fields: {
-            meta: 0,
-        }
-    });
-    return photos;
+    return Photos.findOperationPhotos(operation);
 });
 
 Meteor.publish("coverPhotos", function(){
