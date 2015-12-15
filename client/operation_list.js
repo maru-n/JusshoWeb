@@ -1,4 +1,4 @@
-Meteor.subscribe("allUserName");
+Meteor.subscribe("users");
 
 Template.operationList.onCreated(function(){
     this.subscribe("coverPhotos");

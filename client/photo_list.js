@@ -200,10 +200,12 @@ Template.photoList.onRendered(function(){
     }
 });
 
+
 Template.photoThumbnail.helpers({
     largeImageUrl: function(){
         return this.medium.url;
     },
+
     largeImageGeometry: function(){
         if (!this.medium.size) {
             console.error("No size data on photo #" + this._id);
