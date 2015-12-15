@@ -1,4 +1,4 @@
-Meteor.publish("allUserName", function () {
+Meteor.publish("users", function () {
     return Meteor.users.find({},
         {fields: {'username': 1}
     });
@@ -9,15 +9,7 @@ Meteor.publish("operations", function () {
 });
 
 Meteor.publish('operationPhotos', function(operation){
-    var photos = Photos.find({
-        operation: operation._id,
-        available: true
-    },{
-        fields: {
-            meta: 0,
-        }
-    });
-    return photos;
+    return Photos.findOperationPhotos(operation);
 });
 
 Meteor.publish("coverPhotos", function(){
@@ -25,12 +17,17 @@ Meteor.publish("coverPhotos", function(){
     var photoIds = []
     operations.forEach(function(o){
         try {
-            var p = Photos.findOne({operation:o._id});
+            var p = Photos.findOne({
+                operation:o._id,
+                available:true
+            });
             photoIds.push(p._id);
-        } catch (e) {
-        }
+        } catch (e) {}
     });
-    return Photos.find({_id: {$in: photoIds}})
+    return [
+        operations,
+        Photos.find({_id: {$in: photoIds}})
+    ]
 });
 
 

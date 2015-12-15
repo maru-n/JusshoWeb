@@ -2,6 +2,7 @@ Template.operation.onCreated(function(){
     this.subscribe("operationPhotos", this.data);
 });
 
+
 Template.operation.helpers({
     photos: function() {
         var photos = Photos.find({
