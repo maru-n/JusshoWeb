@@ -6,10 +6,15 @@ Template.operationList.onCreated(function(){
 
 
 Template.operationList.helpers({
-    operationDefaultName: function() {
-        return Operations.defaultName();
-    },
+});
 
+
+Template.operationView.onCreated(function(){
+    Meteor.subscribe("operationPhotoCount", this.data);
+});
+
+
+Template.operationView.helpers({
     ownerName: function() {
         var owner = Meteor.users.findOne(this.owner);
         if (owner) {
@@ -27,9 +32,6 @@ Template.operationList.helpers({
     },
 
     photoCount: function() {
-        if (!this.photos) {
-            return 0;
-        };
-        return this.photos.length;
+        return  Counts.get("operationPhotoCount"+this._id);
     }
-});
+})

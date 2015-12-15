@@ -1,5 +1,11 @@
 <template name="operationList">
     {{#each this}}
+        {{> operationView}}
+    {{/each}}
+</template>
+
+
+<template name="operationView">
     <div class="mdl-card mdl-cell mdl-cell--4-col">
         <div class="mdl-card__media mdl-color-text--grey-50" style="background-image: url('{{coverPhotoUrl}}');">
             <h3 class="over-photo-text">{{name}}</h3>
@@ -15,5 +21,4 @@
             <a href="/operation/{{_id}}">詳細</a>
         </div>
     </div>
-    {{/each}}
 </template>
