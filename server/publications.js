@@ -25,12 +25,17 @@ Meteor.publish("coverPhotos", function(){
     var photoIds = []
     operations.forEach(function(o){
         try {
-            var p = Photos.findOne({operation:o._id});
+            var p = Photos.findOne({
+                operation:o._id,
+                available:true
+            });
             photoIds.push(p._id);
-        } catch (e) {
-        }
+        } catch (e) {}
     });
-    return Photos.find({_id: {$in: photoIds}})
+    return [
+        operations,
+        Photos.find({_id: {$in: photoIds}})
+    ]
 });
 
 
