@@ -1,4 +1,5 @@
 Meteor.subscribe("users");
+Meteor.subscribe("coverPhotos");
 
 Template.operationList.onCreated(function(){
     this.subscribe("coverPhotos");
