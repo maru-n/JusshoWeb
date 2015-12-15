@@ -12,6 +12,10 @@ Meteor.publish('operationPhotos', function(operation){
     return Photos.findOperationPhotos(operation);
 });
 
+Meteor.publish('operationPhotoCount', function(operation) {
+  Counts.publish(this, 'operationPhotoCount'+operation._id, Photos.findOperationPhotos(operation));
+});
+
 Meteor.publish("coverPhotos", function(){
     var operations = Operations.find();
     var photoIds = []
