@@ -1,5 +1,12 @@
 <template name="photoList">
     <div class="my-gallery thumbnail-list" itemscope itemtype="http://schema.org/ImageGallery">
+        {{!
+        <div class="add-photo-button">
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                <i class="material-icons">add</i>
+            </button>
+        </div>
+        !}}
         {{#each this}}
         {{> photoThumbnail}}
         {{/each}}
