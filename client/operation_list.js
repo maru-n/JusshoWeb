@@ -1,5 +1,5 @@
 Template.operationView.onCreated(function(){
-    this.subscribe("operationViewData", this.data);
+    Meteor.subscribe("operationViewData", this.data);
 });
 
 
