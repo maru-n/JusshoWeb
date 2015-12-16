@@ -1,4 +1,5 @@
-Template.operationList.helpers({
+Template.operationView.onCreated(function(){
+    this.subscribe("operationViewData", this.data);
 });
 
 
