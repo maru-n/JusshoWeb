@@ -20,26 +20,22 @@
                 {{/if}}
             </ul>
 
-            <div>
+            <div class="mdl-card__supporting-text">
+                <div>
                 {{#if isUploading}}
-                    <p>
-                        <strong>{{uploadOperation}}にアップロード中（{{uploadedFileNum}}/{{uploadingFileNum}}）</strong>
-                    </p>
+                    <span>{{uploadOperation}}にアップロード中（{{uploadedFileNum}}/{{uploadingFileNum}}）</span>
                 {{else}}
                     {{#if uploadFailedNum}}
-                        <p>
-                            <span style="color:red;">{{uploadOperation}}への{{uploadFailedNum}}枚のアップロードに失敗しました。</span>
-                            <a href="" class='retry-upload-files'>{{uploadFailedNum}}枚を再アップロード</a> <a href="" class='delete-failed-files'>閉じる</a>
-                        </p>
+                        <span style="color:red;">{{uploadOperation}}への{{uploadFailedNum}}枚のアップロードに失敗しました。</span>
+                        <a href="" class='retry-upload-files'>{{uploadFailedNum}}枚を再アップロード</a> <a href="" class='delete-failed-files'>閉じる</a>
                     {{else}}
                         <form>
-                            <p>
-                                <label for="upload-files">写真をアップロード</label>
-                                <input type="file" name="upload-files" class="upload-files" multiple>
-                            </p>
+                            <label for="upload-files">写真をアップロード</label>
+                            <input type="file" name="upload-files" class="upload-files" multiple>
                         </form>
                     {{/if}}
                 {{/if}}
+                </div>
             </div>
 
             {{#with photos}}
