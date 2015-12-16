@@ -1,3 +1,4 @@
+Meteor.subscribe("users");
 Meteor.subscribe("operations");
 
 

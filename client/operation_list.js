@@ -1,16 +1,5 @@
-Meteor.subscribe("users");
-
-Template.operationList.onCreated(function(){
-    Meteor.subscribe("coverPhotos");
-});
-
-
-Template.operationList.helpers({
-});
-
-
 Template.operationView.onCreated(function(){
-    Meteor.subscribe("operationPhotoCount", this.data);
+    this.subscribe("operationViewData", this.data);
 });
 
 

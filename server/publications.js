@@ -1,48 +1,22 @@
 Meteor.publish("users", function () {
-    return Meteor.users.find({},
-        {fields: {'username': 1}
+    return Meteor.users.find({},{
+        fields: {'username': 1}
     });
 });
 
 Meteor.publish("operations", function () {
-    return Operations.find();
+    var operations = Operations.find();
+    return operations
+});
+
+Meteor.publish('operationViewData', function(operation) {
+    Counts.publish(this, 'operationPhotoCount'+operation._id, Photos.findOperationPhotos(operation), {
+        noWarnings: true
+    });
+    var coverPhoto = Photos.findCoverPhoto(operation);
+    return coverPhoto
 });
 
 Meteor.publish('operationPhotos', function(operation){
     return Photos.findOperationPhotos(operation);
-});
-
-Meteor.publish('operationPhotoCount', function(operation) {
-    Counts.publish(this, 'operationPhotoCount'+operation._id, Photos.findOperationPhotos(operation), {
-        noWarnings: true
-    });
-});
-
-Meteor.publish("coverPhotos", function(){
-    var operations = Operations.find();
-    var photoIds = []
-    operations.forEach(function(o){
-        try {
-            var p = Photos.findOne({
-                operation:o._id,
-                available:true
-            });
-            photoIds.push(p._id);
-        } catch (e) {}
-    });
-    return [
-        operations,
-        Photos.find({_id: {$in: photoIds}})
-    ]
-});
-
-
-Meteor.publish("photos", function () {
-    return Photos.find({
-        available: true
-    },{
-        fields: {
-            meta: 0,
-        }
-    });
 });
