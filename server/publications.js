@@ -5,20 +5,7 @@ Meteor.publish("users", function () {
 });
 
 Meteor.publish("operations", function () {
-    return Operations.find();
-});
-
-Meteor.publish('operationPhotos', function(operation){
-    return Photos.findOperationPhotos(operation);
-});
-
-Meteor.publish('operationPhotoCount', function(operation) {
-    Counts.publish(this, 'operationPhotoCount'+operation._id, Photos.findOperationPhotos(operation), {
-        noWarnings: true
-    });
-});
-
-Meteor.publish("coverPhotos", function(){
+    var self = this;
     var operations = Operations.find();
     var photoIds = []
     operations.forEach(function(o){
@@ -30,19 +17,16 @@ Meteor.publish("coverPhotos", function(){
             photoIds.push(p._id);
         } catch (e) {}
     });
-    return [
-        operations,
-        Photos.find({_id: {$in: photoIds}})
-    ]
+    var coverPhotos = Photos.find({_id: {$in: photoIds}});
+    return [operations, coverPhotos]
 });
 
-
-Meteor.publish("photos", function () {
-    return Photos.find({
-        available: true
-    },{
-        fields: {
-            meta: 0,
-        }
+Meteor.publish('operationPhotoCount', function(operation) {
+    Counts.publish(this, 'operationPhotoCount'+operation._id, Photos.findOperationPhotos(operation), {
+        noWarnings: true
     });
+});
+
+Meteor.publish('operationPhotos', function(operation){
+    return Photos.findOperationPhotos(operation);
 });
